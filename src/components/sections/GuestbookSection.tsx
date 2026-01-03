@@ -91,11 +91,11 @@ export function GuestbookSection() {
   const getAttendanceBadge = (status?: 'attending' | 'not-attending' | 'maybe') => {
     switch (status) {
       case 'attending':
-        return { label: 'Hadir', color: 'bg-green-500' };
+        return { label: 'Hadir', color: 'bg-wedding-sage text-white', dotColor: 'bg-white/90' };
       case 'not-attending':
-        return { label: 'Tidak Hadir', color: 'bg-gray-500' };
+        return { label: 'Tidak Hadir', color: 'bg-wedding-secondary text-wedding-dark', dotColor: 'bg-wedding-dark/70' };
       case 'maybe':
-        return { label: 'Ragu', color: 'bg-yellow-500' };
+        return { label: 'Ragu', color: 'bg-wedding-terracotta text-white', dotColor: 'bg-white/90' };
       default:
         return null;
     }
@@ -129,7 +129,7 @@ export function GuestbookSection() {
               <div className="h-px w-12 md:w-20 bg-gradient-to-l from-transparent to-wedding-gold" />
             </div>
             <h2 className="font-wedding-elegant text-3xl md:text-5xl text-wedding-cream mb-4">
-              Buku Tamu
+              RSVP
             </h2>
             <p className="font-wedding-body text-wedding-cream/95 max-w-2xl mx-auto text-sm md:text-base">
               Tulis ucapan dan doa terbaik untuk kami. Setiap kata dari Anda sangat berarti bagi kami.
@@ -185,9 +185,24 @@ export function GuestbookSection() {
                   </label>
                   <div className="flex flex-wrap gap-3">
                     {([
-                      { value: 'attending' as const, label: 'Hadir', color: 'bg-green-500' },
-                      { value: 'not-attending' as const, label: 'Tidak Hadir', color: 'bg-gray-500' },
-                      { value: 'maybe' as const, label: 'Ragu', color: 'bg-yellow-500' }
+                      { 
+                        value: 'attending' as const, 
+                        label: 'Hadir', 
+                        selectedBg: 'bg-wedding-sage',
+                        selectedText: 'text-white',
+                        selectedBorder: 'border-wedding-sage',
+                        dotColor: 'bg-wedding-sage',
+                        selectedDotColor: 'bg-white/90'
+                      },
+                      { 
+                        value: 'not-attending' as const, 
+                        label: 'Tidak Hadir', 
+                        selectedBg: 'bg-wedding-secondary',
+                        selectedText: 'text-wedding-dark',
+                        selectedBorder: 'border-wedding-secondary',
+                        dotColor: 'bg-wedding-secondary',
+                        selectedDotColor: 'bg-wedding-dark/70'
+                      },
                     ] as const).map((option) => (
                       <button
                         key={option.value}
@@ -198,33 +213,21 @@ export function GuestbookSection() {
                             ? undefined
                             : option.value
                         })}
-                        className={`px-4 py-2 rounded-full border-2 transition-all font-wedding-body text-sm flex items-center gap-2 ${
+                        className={`px-4 py-3 rounded-full border-2 transition-all duration-300 font-wedding-body text-sm font-medium flex items-center gap-2 shadow-sm hover:shadow-md ${
                           formData.attendanceStatus === option.value
-                            ? `${option.color} text-white border-transparent`
-                            : 'bg-white text-wedding-dark border-wedding-secondary/30 hover:border-wedding-accent/50'
+                            ? `${option.selectedBg} ${option.selectedText} ${option.selectedBorder} scale-105 shadow-lg`
+                            : 'bg-white text-wedding-dark border-wedding-secondary/40 hover:border-wedding-accent hover:bg-wedding-cream/50'
                         }`}
                       >
-                        <div className={`w-2 h-2 rounded-full ${option.color}`} />
+                        <div className={`w-2.5 h-2.5 rounded-full transition-colors ${
+                          formData.attendanceStatus === option.value
+                            ? option.selectedDotColor
+                            : option.dotColor
+                        }`} />
                         {option.label}
                       </button>
                     ))}
                   </div>
-                </div>
-
-                {/* Location Input (Optional) */}
-                <div>
-                  <label htmlFor="location" className="block font-wedding-body text-wedding-dark font-medium mb-2 flex items-center gap-2">
-                    <MapPin className="w-4 h-4" />
-                    Asal (Opsional)
-                  </label>
-                  <input
-                    id="location"
-                    type="text"
-                    value={formData.location}
-                    onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-                    placeholder="Kota/Kabupaten"
-                    className="w-full px-4 py-3 rounded-lg border border-wedding-secondary/30 focus:border-wedding-accent focus:ring-2 focus:ring-wedding-accent/20 outline-none transition-all font-wedding-body text-wedding-dark"
-                  />
                 </div>
 
                 {/* Submit Button */}
@@ -283,8 +286,8 @@ export function GuestbookSection() {
                                   {entry.guestName}
                                 </h4>
                                 {badge && (
-                                  <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs text-white ${badge.color}`}>
-                                    <div className="w-1.5 h-1.5 rounded-full bg-white" />
+                                  <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium ${badge.color} shadow-sm`}>
+                                    <div className={`w-1.5 h-1.5 rounded-full ${badge.dotColor}`} />
                                     {badge.label}
                                   </span>
                                 )}

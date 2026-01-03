@@ -1,5 +1,6 @@
 import { create } from 'zustand';
-import { WeddingInvitation, RSVP, GuestbookEntry, CountdownTimer } from '@/types/wedding';
+import { WeddingInvitation, GuestbookEntry, CountdownTimer } from '@/types/wedding';
+import { generateId, getCurrentTime, getCurrentDate } from '@/utils/client-safe';
 
 interface WeddingStore {
   invitation: WeddingInvitation | null;
@@ -8,7 +9,6 @@ interface WeddingStore {
 
   setInvitation: (invitation: WeddingInvitation) => void;
   updateCountdown: () => void;
-  addRSVP: (rsvp: RSVP) => void;
   addGuestbookEntry: (entry: Omit<GuestbookEntry, 'id' | 'submittedAt'>) => void;
   setGuestName: (name: string) => void;
 }
@@ -27,7 +27,7 @@ export const useWeddingStore = create<WeddingStore>((set, get) => ({
     if (!invitation?.events.length) return;
 
     const weddingDate = invitation.events[0].date;
-    const now = new Date().getTime();
+    const now = getCurrentTime();
     const distance = weddingDate.getTime() - now;
 
     if (distance > 0) {
@@ -40,18 +40,6 @@ export const useWeddingStore = create<WeddingStore>((set, get) => ({
     } else {
       set({ countdown: { days: 0, hours: 0, minutes: 0, seconds: 0 } });
     }
-  },
-
-  addRSVP: (rsvp) => {
-    const { invitation } = get();
-    if (!invitation) return;
-
-    const updatedInvitation = {
-      ...invitation,
-      rsvps: [...invitation.rsvps, rsvp]
-    };
-    
-    set({ invitation: updatedInvitation });
   },
 
   setGuestName: (guestName) => {
@@ -72,8 +60,8 @@ export const useWeddingStore = create<WeddingStore>((set, get) => ({
 
     const newEntry: GuestbookEntry = {
       ...entry,
-      id: `guestbook-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
-      submittedAt: new Date()
+      id: generateId('guestbook'),
+      submittedAt: getCurrentDate()
     };
 
     const updatedInvitation = {

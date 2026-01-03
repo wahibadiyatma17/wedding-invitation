@@ -11,9 +11,7 @@ import { HeroSection } from '@/components/sections/HeroSection';
 import { CountdownSection } from '@/components/sections/CountdownSection';
 import { EventSection } from '@/components/sections/EventSection';
 import { GallerySection } from '@/components/sections/GallerySection';
-import { DressCodeSection } from '@/components/sections/DressCodeSection';
 import { GiftSection } from '@/components/sections/GiftSection';
-import { RSVPSection } from '@/components/sections/RSVPSection';
 import { GuestbookSection } from '@/components/sections/GuestbookSection';
 
 import { AudioPlayer } from '@/components/ui/AudioPlayer';
@@ -111,15 +109,7 @@ function HomeContent() {
           </ScrollReveal>
 
           <ScrollReveal direction="up" delay={250} threshold={0.15}>
-            <DressCodeSection />
-          </ScrollReveal>
-
-          <ScrollReveal direction="up" delay={300} threshold={0.15}>
             <GiftSection />
-          </ScrollReveal>
-
-          <ScrollReveal direction="up" delay={350} threshold={0.15}>
-            <RSVPSection />
           </ScrollReveal>
 
           <GuestbookSection />

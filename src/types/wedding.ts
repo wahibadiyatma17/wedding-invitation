@@ -42,12 +42,6 @@ export interface WeddingEvent {
   };
 }
 
-export interface DressCode {
-  description: string;
-  colors: string[];
-  suggestions?: string[];
-}
-
 export interface WeddingGift {
   bankAccounts: BankAccount[];
   message?: string;
@@ -57,14 +51,6 @@ export interface BankAccount {
   bank: string;
   accountNumber: string;
   accountName: string;
-}
-
-export interface RSVP {
-  guestName: string;
-  attendance: 'yes' | 'no' | 'maybe';
-  guestCount?: number;
-  message?: string;
-  submittedAt: Date;
 }
 
 export interface GuestbookEntry {
@@ -79,9 +65,7 @@ export interface GuestbookEntry {
 export interface WeddingInvitation {
   couple: Couple;
   events: WeddingEvent[];
-  dressCode: DressCode;
   gifts: WeddingGift;
-  rsvps: RSVP[];
   guestbookEntries: GuestbookEntry[];
   guestName?: string;
   musicUrl?: string;

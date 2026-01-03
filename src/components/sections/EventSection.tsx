@@ -1,7 +1,5 @@
 import { useWeddingStore } from '@/stores/weddingStore';
-import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
-import { ParallaxWrapper } from '@/components/animations/ParallaxWrapper';
 import Image from 'next/image';
 
 export function EventSection() {
@@ -11,25 +9,6 @@ export function EventSection() {
 
   const { events } = invitation;
 
-  const formatEventDate = (date: Date) => {
-    return date.toLocaleDateString('id-ID', {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    });
-  };
-
-  const addToCalendar = (event: typeof events[0]) => {
-    const startDate = event.date.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
-    const endDate = event.time.end 
-      ? new Date(event.date.getTime() + 2 * 60 * 60 * 1000).toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z'
-      : startDate;
-    
-    const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(event.title)}&dates=${startDate}/${endDate}&details=${encodeURIComponent(event.venue.address)}&location=${encodeURIComponent(event.venue.name)}`;
-    
-    window.open(url, '_blank');
-  };
 
   return (
     <section className="px-4 py-5 lg:px-6 lg:py-8" style={{background: 'linear-gradient(135deg, #FDF1E9 0%, #F3E2D7 50%, #BFAB97 100%)'}}>

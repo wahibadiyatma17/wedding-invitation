@@ -105,11 +105,6 @@ export const weddingData: WeddingInvitation = {
       }
     }
   ],
-  dressCode: {
-    description: 'Kami mengundang Anda untuk mengenakan pakaian dengan nuansa warna:',
-    colors: ['#38761d', '#274e13', '#bcbcbc'],
-    suggestions: ['Hijau Tosca', 'Hijau Tua', 'Abu-abu']
-  },
   gifts: {
     bankAccounts: [
       {
@@ -125,7 +120,6 @@ export const weddingData: WeddingInvitation = {
     ],
     message: 'Kehadiran dan doa restu Anda adalah hadiah terbesar bagi kami. Namun jika ingin memberikan hadiah, Anda dapat mengirimkannya melalui:'
   },
-  rsvps: [],
   guestbookEntries: [],
   musicUrl: '/audio/wedding-song.mp3'
 };

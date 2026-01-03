@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { AudioPlayerState, ToastMessage, ModalState } from '@/types/ui';
+import { generateId } from '@/utils/client-safe';
 
 interface UIStore {
   audioPlayer: AudioPlayerState;
@@ -55,7 +56,7 @@ export const useUIStore = create<UIStore>((set, get) => ({
   },
 
   addToast: (toast) => {
-    const id = Math.random().toString(36).substring(7);
+    const id = generateId('toast');
     const newToast: ToastMessage = { ...toast, id };
     
     set((state) => ({

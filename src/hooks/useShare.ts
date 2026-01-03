@@ -5,24 +5,27 @@ import { useUIStore } from '@/stores/uiStore';
 export function useShare() {
   const addToast = useUIStore((state) => state.addToast);
 
-  const shareData = {
+  const getShareData = () => ({
     title: 'Undangan Pernikahan Ajik & Ery',
     text: 'Anda diundang ke pernikahan kami! 💒',
     url: typeof window !== 'undefined' ? window.location.href : ''
-  };
+  });
 
   const shareToWhatsApp = () => {
+    const shareData = getShareData();
     const text = encodeURIComponent(`${shareData.text}\n\n${shareData.url}`);
     const whatsappUrl = `https://wa.me/?text=${text}`;
     window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
   };
 
   const shareToFacebook = () => {
+    const shareData = getShareData();
     const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareData.url)}`;
     window.open(facebookUrl, '_blank', 'noopener,noreferrer,width=600,height=400');
   };
 
   const shareToTwitter = () => {
+    const shareData = getShareData();
     const text = encodeURIComponent(shareData.text);
     const url = encodeURIComponent(shareData.url);
     const twitterUrl = `https://twitter.com/intent/tweet?text=${text}&url=${url}`;
@@ -30,6 +33,7 @@ export function useShare() {
   };
 
   const copyLink = async () => {
+    const shareData = getShareData();
     try {
       if (navigator.clipboard && window.isSecureContext) {
         await navigator.clipboard.writeText(shareData.url);
@@ -76,6 +80,7 @@ export function useShare() {
   };
 
   const nativeShare = async () => {
+    const shareData = getShareData();
     try {
       if (navigator.share) {
         await navigator.share(shareData);
@@ -95,6 +100,8 @@ export function useShare() {
     shareToTwitter,
     copyLink,
     nativeShare,
-    isNativeShareSupported: typeof navigator !== 'undefined' && !!navigator.share
+    get isNativeShareSupported() {
+      return typeof navigator !== 'undefined' && !!navigator.share;
+    }
   };
 }
