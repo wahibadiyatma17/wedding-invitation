@@ -1,65 +1,146 @@
-import Image from "next/image";
+'use client';
+
+import { Suspense, useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { useWeddingStore } from '@/stores/weddingStore';
+import { weddingData } from '@/data/weddingData';
+import Image from 'next/image';
+
+import { OpeningSection } from '@/components/sections/OpeningSection';
+import { HeroSection } from '@/components/sections/HeroSection';
+import { CountdownSection } from '@/components/sections/CountdownSection';
+import { EventSection } from '@/components/sections/EventSection';
+import { GallerySection } from '@/components/sections/GallerySection';
+import { DressCodeSection } from '@/components/sections/DressCodeSection';
+import { GiftSection } from '@/components/sections/GiftSection';
+import { RSVPSection } from '@/components/sections/RSVPSection';
+import { GuestbookSection } from '@/components/sections/GuestbookSection';
+
+import { AudioPlayer } from '@/components/ui/AudioPlayer';
+import { Modal } from '@/components/ui/Modal';
+import { ToastContainer } from '@/components/ui/Toast';
+import { ScrollReveal } from '@/components/animations/ScrollReveal';
+import { FloatingElements } from '@/components/decorative/FloatingElements';
+
+function HomeContent() {
+  const { setInvitation, setGuestName } = useWeddingStore();
+  const searchParams = useSearchParams();
+  const [isMainContentVisible, setIsMainContentVisible] = useState(false);
+
+  useEffect(() => {
+    const guestName = searchParams.get('to');
+    const invitationWithGuest = {
+      ...weddingData,
+      guestName: guestName || undefined,
+    };
+
+    setInvitation(invitationWithGuest);
+    if (guestName) {
+      setGuestName(guestName);
+    }
+  }, [setInvitation, setGuestName, searchParams]);
+
+  // Listen for opening animation completion
+  useEffect(() => {
+    const handleOpeningComplete = () => {
+      setIsMainContentVisible(true);
+      
+      // Remove overflow hidden after animation completes
+      setTimeout(() => {
+        const mainElement = document.querySelector('main');
+        if (mainElement) {
+          mainElement.classList.remove('overflow-hidden');
+        }
+      }, 800); // Match animation duration
+    };
+
+    window.addEventListener('openingAnimationComplete', handleOpeningComplete);
+    return () => {
+      window.removeEventListener('openingAnimationComplete', handleOpeningComplete);
+    };
+  }, []);
+
+  return (
+    <main className="min-h-screen relative overflow-hidden" style={{background: '#FDF1E9'}}>
+      <OpeningSection />
+
+      {/* Desktop Split Layout / Mobile Single Column */}
+      <div className={`lg:flex lg:h-screen relative z-40 ${isMainContentVisible ? 'animate-slideUpFromBottom' : 'transform translate-y-full'}`} style={{background: 'linear-gradient(135deg, #FDF1E9 0%, #F3E2D7 50%, #BFAB97 100%)'}}>
+        {/* Left Side - Full Background Image (Desktop Only) */}
+        <div className="hidden lg:block lg:flex-1 lg:fixed lg:left-0 lg:top-0 lg:h-screen lg:right-[450px]">
+          <Image
+            src="/images/pre-wedding-images/25.jpg"
+            alt="Wedding background"
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-black/20 to-black/40"></div>
+
+          {/* Overlay Text on Image */}
+          <div className="absolute bottom-8 left-8 text-white">
+            <h1 className="text-2xl font-wedding-elegant mb-2 tracking-wide opacity-90">
+              THE WEDDING OF
+            </h1>
+            <p className="text-5xl font-wedding-script leading-tight">Ajik & Ery</p>
+            <p className="text-base font-wedding-body mt-4 opacity-80 tracking-wider">
+              24 . 01 . 2026
+            </p>
+          </div>
+        </div>
+
+        {/* Right Side - Scrollable Content (Fixed 450px width) */}
+        <div
+          className="w-full lg:w-[450px] lg:ml-auto lg:fixed lg:right-0 lg:top-0 lg:h-screen lg:overflow-y-auto"
+          style={{ background: 'linear-gradient(135deg, #FDF1E9 0%, #F3E2D7 50%, #BFAB97 100%)' }}
+        >
+          <ScrollReveal direction="fade" threshold={0.1}>
+            <HeroSection />
+          </ScrollReveal>
+
+          <ScrollReveal direction="up" delay={100} threshold={0.15}>
+            <CountdownSection />
+          </ScrollReveal>
+
+          <ScrollReveal direction="up" delay={150} threshold={0.15}>
+            <EventSection />
+          </ScrollReveal>
+
+          <ScrollReveal direction="up" delay={200} threshold={0.15}>
+            <GallerySection />
+          </ScrollReveal>
+
+          <ScrollReveal direction="up" delay={250} threshold={0.15}>
+            <DressCodeSection />
+          </ScrollReveal>
+
+          <ScrollReveal direction="up" delay={300} threshold={0.15}>
+            <GiftSection />
+          </ScrollReveal>
+
+          <ScrollReveal direction="up" delay={350} threshold={0.15}>
+            <RSVPSection />
+          </ScrollReveal>
+
+          <GuestbookSection />
+        </div>
+      </div>
+
+      {weddingData.musicUrl && <AudioPlayer src={weddingData.musicUrl} />}
+
+      <Modal />
+      <ToastContainer />
+      <FloatingElements />
+    </main>
+  );
+}
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center" style={{background: '#FDF1E9'}}>
+      <div className="text-wedding-dark">Loading...</div>
+    </div>}>
+      <HomeContent />
+    </Suspense>
   );
 }
