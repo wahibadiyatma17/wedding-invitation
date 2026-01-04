@@ -4,12 +4,12 @@ export function ToastContainer() {
   const { toasts, removeToast } = useUIStore();
 
   return (
-    <div className="fixed bottom-4 right-4 z-50 space-y-2">
+    <div className="fixed top-4 right-4 z-[9999] space-y-2 md:top-4">
       {toasts.map((toast) => (
-        <Toast 
-          key={toast.id} 
-          toast={toast} 
-          onClose={() => removeToast(toast.id)} 
+        <Toast
+          key={toast.id}
+          toast={toast}
+          onClose={() => removeToast(toast.id)}
         />
       ))}
     </div>

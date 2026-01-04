@@ -1,22 +1,38 @@
 import { create } from 'zustand';
-import { WeddingInvitation, GuestbookEntry, CountdownTimer } from '@/types/wedding';
+import { WeddingInvitation, CountdownTimer } from '@/types/wedding';
 import { generateId, getCurrentTime, getCurrentDate } from '@/utils/client-safe';
+import { 
+  GuestbookEntry, 
+  CreateGuestbookEntry, 
+  addGuestbookEntry as addFirestoreGuestbookEntry,
+  subscribeToGuestbook 
+} from '@/services/guestbook';
 
 interface WeddingStore {
   invitation: WeddingInvitation | null;
   countdown: CountdownTimer;
+  guestbookEntries: GuestbookEntry[];
   isLoading: boolean;
+  isGuestbookLoading: boolean;
+  guestbookError: string | null;
 
   setInvitation: (invitation: WeddingInvitation) => void;
   updateCountdown: () => void;
-  addGuestbookEntry: (entry: Omit<GuestbookEntry, 'id' | 'submittedAt'>) => void;
+  addGuestbookEntry: (entry: CreateGuestbookEntry) => Promise<void>;
+  setGuestbookEntries: (entries: GuestbookEntry[]) => void;
+  setGuestbookLoading: (loading: boolean) => void;
+  setGuestbookError: (error: string | null) => void;
+  subscribeToGuestbookUpdates: () => (() => void) | void;
   setGuestName: (name: string) => void;
 }
 
 export const useWeddingStore = create<WeddingStore>((set, get) => ({
   invitation: null,
   countdown: { days: 0, hours: 0, minutes: 0, seconds: 0 },
+  guestbookEntries: [],
   isLoading: true,
+  isGuestbookLoading: false,
+  guestbookError: null,
 
   setInvitation: (invitation) => {
     set({ invitation, isLoading: false });
@@ -54,21 +70,51 @@ export const useWeddingStore = create<WeddingStore>((set, get) => ({
     });
   },
 
-  addGuestbookEntry: (entry) => {
-    const { invitation } = get();
-    if (!invitation) return;
+  addGuestbookEntry: async (entry) => {
+    set({ isGuestbookLoading: true, guestbookError: null });
+    
+    try {
+      // Add to Firestore
+      await addFirestoreGuestbookEntry(entry);
+      
+      // Note: The real-time listener will automatically update the store
+      // when the new entry is added to Firestore
+      set({ isGuestbookLoading: false });
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'Failed to add guestbook entry';
+      set({ 
+        isGuestbookLoading: false, 
+        guestbookError: errorMessage 
+      });
+      throw error;
+    }
+  },
 
-    const newEntry: GuestbookEntry = {
-      ...entry,
-      id: generateId('guestbook'),
-      submittedAt: getCurrentDate()
-    };
+  setGuestbookEntries: (entries) => {
+    set({ guestbookEntries: entries });
+  },
 
-    const updatedInvitation = {
-      ...invitation,
-      guestbookEntries: [newEntry, ...invitation.guestbookEntries]
-    };
+  setGuestbookLoading: (loading) => {
+    set({ isGuestbookLoading: loading });
+  },
 
-    set({ invitation: updatedInvitation });
-  }
+  setGuestbookError: (error) => {
+    set({ guestbookError: error });
+  },
+
+  subscribeToGuestbookUpdates: () => {
+    try {
+      return subscribeToGuestbook(
+        (entries) => {
+          set({ guestbookEntries: entries, guestbookError: null });
+        },
+        (error) => {
+          set({ guestbookError: error.message });
+        }
+      );
+    } catch (error) {
+      console.error('Failed to subscribe to guestbook updates:', error);
+      set({ guestbookError: 'Failed to connect to real-time updates' });
+    }
+  },
 }));

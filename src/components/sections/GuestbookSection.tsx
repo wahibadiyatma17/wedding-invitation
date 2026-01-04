@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { useWeddingStore } from '@/stores/weddingStore';
 import { useUIStore } from '@/stores/uiStore';
@@ -8,23 +8,40 @@ import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { ScrollReveal } from '@/components/animations/ScrollReveal';
 import { ParallaxWrapper } from '@/components/animations/ParallaxWrapper';
-import { MessageCircle, MapPin, Clock } from 'lucide-react';
+import { MessageCircle, Clock } from 'lucide-react';
 
 export function GuestbookSection() {
-  const invitation = useWeddingStore((state) => state.invitation);
+  const guestbookEntries = useWeddingStore((state) => state.guestbookEntries);
+  const isGuestbookLoading = useWeddingStore((state) => state.isGuestbookLoading);
+  const guestbookError = useWeddingStore((state) => state.guestbookError);
   const addGuestbookEntry = useWeddingStore((state) => state.addGuestbookEntry);
+  const subscribeToGuestbookUpdates = useWeddingStore((state) => state.subscribeToGuestbookUpdates);
   const addToast = useUIStore((state) => state.addToast);
 
   const [formData, setFormData] = useState({
     guestName: '',
     message: '',
     attendanceStatus: undefined as 'attending' | 'not-attending' | 'maybe' | undefined,
-    location: ''
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [showAll, setShowAll] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const unsubscribeRef = useRef<(() => void) | null>(null);
 
-  const guestbookEntries = invitation?.guestbookEntries || [];
+  // Set up real-time listener on component mount
+  useEffect(() => {
+    const unsubscribe = subscribeToGuestbookUpdates();
+    if (unsubscribe) {
+      unsubscribeRef.current = unsubscribe;
+    }
+
+    // Cleanup on unmount
+    return () => {
+      if (unsubscribeRef.current) {
+        unsubscribeRef.current();
+      }
+    };
+  }, [subscribeToGuestbookUpdates]);
+
   const displayedEntries = showAll ? guestbookEntries : guestbookEntries.slice(0, 10);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -48,11 +65,17 @@ export function GuestbookSection() {
     setIsSubmitting(true);
 
     try {
-      addGuestbookEntry({
+      // Debug logging to verify form data
+      console.log('Submitting guestbook entry:', {
         guestName: formData.guestName.trim(),
         message: formData.message.trim(),
         attendanceStatus: formData.attendanceStatus,
-        location: formData.location.trim() || undefined
+      });
+
+      await addGuestbookEntry({
+        guestName: formData.guestName.trim(),
+        message: formData.message.trim(),
+        attendanceStatus: formData.attendanceStatus,
       });
 
       addToast({
@@ -65,10 +88,40 @@ export function GuestbookSection() {
         guestName: '',
         message: '',
         attendanceStatus: undefined,
-        location: ''
       });
-    } catch {
-      addToast({ type: 'error', message: 'Gagal mengirim pesan. Silakan coba lagi.' });
+    } catch (error) {
+      console.error('Error submitting guestbook entry:', error);
+
+      // Log detailed error information
+      if (error instanceof Error) {
+        console.error('Error message:', error.message);
+        console.error('Error stack:', error.stack);
+      }
+
+      // Check if it's a Firebase error
+      const firebaseError = error as any;
+      if (firebaseError?.code) {
+        console.error('Firebase error code:', firebaseError.code);
+        console.error('Firebase error details:', firebaseError.message);
+
+        // Show specific error messages
+        if (firebaseError.code === 'permission-denied') {
+          addToast({
+            type: 'error',
+            message: 'Akses ditolak. Silakan hubungi administrator.'
+          });
+        } else {
+          addToast({
+            type: 'error',
+            message: 'Gagal mengirim pesan. Silakan coba lagi.'
+          });
+        }
+      } else {
+        addToast({
+          type: 'error',
+          message: 'Gagal mengirim pesan. Silakan coba lagi.'
+        });
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -153,7 +206,7 @@ export function GuestbookSection() {
                     value={formData.guestName}
                     onChange={(e) => setFormData({ ...formData, guestName: e.target.value })}
                     placeholder="Masukkan nama Anda"
-                    className="w-full px-4 py-3 rounded-lg border border-wedding-secondary/30 focus:border-wedding-accent focus:ring-2 focus:ring-wedding-accent/20 outline-none transition-all font-wedding-body text-wedding-dark"
+                    className="w-full px-4 py-3 rounded-lg border border-wedding-secondary/30 focus:border-wedding-accent focus:ring-2 focus:ring-wedding-accent/20 outline-none transition-all font-sans text-wedding-dark"
                     required
                   />
                 </div>
@@ -170,7 +223,7 @@ export function GuestbookSection() {
                     placeholder="Tulis ucapan dan doa terbaik untuk kami..."
                     rows={4}
                     maxLength={500}
-                    className="w-full px-4 py-3 rounded-lg border border-wedding-secondary/30 focus:border-wedding-accent focus:ring-2 focus:ring-wedding-accent/20 outline-none transition-all font-wedding-body text-wedding-dark resize-none"
+                    className="w-full px-4 py-3 rounded-lg border border-wedding-secondary/30 focus:border-wedding-accent focus:ring-2 focus:ring-wedding-accent/20 outline-none transition-all font-sans text-wedding-dark resize-none"
                     required
                   />
                   <p className="text-xs text-wedding-dark/75 mt-1 text-right">
@@ -304,12 +357,6 @@ export function GuestbookSection() {
                                   <Clock className="w-3 h-3" />
                                   {getTimeAgo(entry.submittedAt)}
                                 </span>
-                                {entry.location && (
-                                  <span className="flex items-center gap-1">
-                                    <MapPin className="w-3 h-3" />
-                                    {entry.location}
-                                  </span>
-                                )}
                               </div>
                             </div>
                           </div>
