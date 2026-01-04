@@ -20,17 +20,20 @@ export function ParallaxWrapper({
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
+    // Only run on client-side
+    if (typeof window === 'undefined') return;
+
     const handleScroll = () => {
       if (ref.current) {
         const rect = ref.current.getBoundingClientRect();
         const elementTop = rect.top + window.scrollY;
         const elementHeight = rect.height;
         const windowHeight = window.innerHeight;
-        
+
         // Calculate scroll progress for this element
         const scrollProgress = (window.scrollY + windowHeight - elementTop) / (windowHeight + elementHeight);
         const clampedProgress = Math.max(0, Math.min(1, scrollProgress));
-        
+
         setScrollY(clampedProgress);
       }
     };

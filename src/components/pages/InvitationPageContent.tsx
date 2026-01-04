@@ -57,6 +57,9 @@ export function InvitationPageContent({ eventFilter }: InvitationPageContentProp
 
   // Listen for opening animation completion
   useEffect(() => {
+    // Only run on client-side
+    if (typeof window === 'undefined') return;
+
     const handleOpeningComplete = () => {
       setIsMainContentVisible(true);
 
