@@ -29,6 +29,11 @@ export function OpeningSection() {
 
   const { couple } = invitation;
 
+  // Auto-detect date: use event date if only one event, otherwise use couple.weddingDate
+  const displayDate = invitation.events.length === 1
+    ? invitation.events[0].date
+    : couple.weddingDate;
+
   const handleOpenInvitation = () => {
     setIsAnimating(true);
     
@@ -86,7 +91,7 @@ export function OpeningSection() {
               {/* Decorative Top */}
               <div className="mb-6">
                 <div className="w-12 h-0.5 bg-white/60 mx-auto mb-3" style={{backgroundColor: '#7F5F45'}}></div>
-                <p className="text-xs tracking-[0.2em] uppercase text-white/80 font-wedding-body" style={{color: '#381516'}}>
+                <p className="text-base tracking-[0.2em] uppercase text-white/80 font-wedding-body" style={{color: '#381516'}}>
                   The Wedding of
                 </p>
                 <div className="w-12 h-0.5 bg-white/60 mx-auto mt-3" style={{backgroundColor: '#7F5F45'}}></div>
@@ -94,42 +99,43 @@ export function OpeningSection() {
 
               {/* Names */}
               <div className="mb-6">
-                <h1 className="text-3xl md:text-5xl lg:text-4xl font-wedding-elegant text-white mb-3" style={{color: '#311212'}}>
+                <h1 className="text-4xl md:text-5xl lg:text-4xl font-wedding-elegant text-white mb-3" style={{color: '#311212'}}>
                   {couple.bride.name}
                 </h1>
-                <div className="text-2xl md:text-4xl lg:text-3xl text-white/90 font-wedding-script my-3" style={{color: '#7F5F45'}}>
+                <div className="text-3xl md:text-4xl lg:text-3xl text-white/90 font-wedding-script my-3" style={{color: '#7F5F45'}}>
                   &
                 </div>
-                <h1 className="text-3xl md:text-5xl lg:text-4xl font-wedding-elegant text-white mb-4" style={{color: '#311212'}}>
+                <h1 className="text-4xl md:text-5xl lg:text-4xl font-wedding-elegant text-white mb-4" style={{color: '#311212'}}>
                   {couple.groom.name}
                 </h1>
               </div>
 
               {/* Date */}
               <div className="mb-6">
-                <div className="text-base lg:text-base text-white/90 font-wedding-body" style={{color: '#381516'}}>
-                  {couple.weddingDate.toLocaleDateString('id-ID', { 
-                    day: '2-digit',
-                    month: '2-digit',
+                <div className="text-base lg:text-lg font-wedding-body font-semibold capitalize tracking-wide" style={{color: '#311212'}}>
+                  {displayDate.toLocaleDateString('id-ID', {
+                    weekday: 'long',
+                    day: 'numeric',
+                    month: 'long',
                     year: 'numeric'
-                  }).replace(/\//g, ' • ')}
+                  })}
                 </div>
               </div>
 
               {/* Guest Name */}
               {invitation.guestName && (
-                <div className="mb-6 bg-white/10 lg:bg-white/70 backdrop-blur-sm rounded-xl p-4 border border-white/20" style={{borderColor: '#BFAB97'}}>
-                  <p className="text-white/80 text-xs font-wedding-body mb-1" style={{color: '#381516'}}>
+                <div className="mb-6 text-center">
+                  <p className="text-sm font-wedding-body mb-1" style={{color: '#381516'}}>
                     Kepada Yth.
                   </p>
-                  <p className="text-white/80 text-xs font-wedding-body mb-2" style={{color: '#381516'}}>
+                  <p className="text-sm font-wedding-body mb-2" style={{color: '#381516'}}>
                     Bapak/Ibu/Saudara/i
                   </p>
-                  <p className="text-lg lg:text-lg text-white font-wedding-elegant font-semibold" style={{color: '#311212'}}>
+                  <p className="text-2xl lg:text-3xl font-wedding-elegant font-bold mb-2" style={{color: '#311212'}}>
                     {invitation.guestName}
                   </p>
-                  <p className="text-white/60 text-xs mt-2 italic font-wedding-body" style={{color: '#7F5F45'}}>
-                    *Mohon maaf bila ada kesalahan dalam penulisan nama/gelar
+                  <p className="text-sm font-wedding-body" style={{color: '#381516'}}>
+                    di Tempat
                   </p>
                 </div>
               )}

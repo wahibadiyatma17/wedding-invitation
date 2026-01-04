@@ -28,6 +28,39 @@ export function GiftSection() {
     }
   };
 
+  const getBankLogo = (bankName: string) => {
+    if (bankName.toLowerCase().includes('bri')) {
+      return (
+        <div className="w-16 h-10 relative">
+          <Image
+            src="https://upload.wikimedia.org/wikipedia/commons/2/2e/BRI_2020.svg"
+            alt="BRI Logo"
+            fill
+            className="object-contain"
+          />
+        </div>
+      );
+    }
+    if (bankName.toLowerCase().includes('bca')) {
+      return (
+        <div className="w-16 h-10 relative">
+          <Image
+            src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Bank_Central_Asia.svg"
+            alt="BCA Logo"
+            fill
+            className="object-contain"
+          />
+        </div>
+      );
+    }
+    // Default placeholder for other banks
+    return (
+      <div className="w-12 h-8 rounded flex items-center justify-center" style={{backgroundColor: '#F3E2D7'}}>
+        <div className="w-6 h-4 rounded-sm" style={{backgroundColor: '#C6B283'}}></div>
+      </div>
+    );
+  };
+
   return (
     <section className="py-16 px-4 relative overflow-hidden">
       {/* Background Image with Overlay */}
@@ -66,9 +99,7 @@ export function GiftSection() {
                   <h3 className="text-lg font-semibold font-wedding-elegant" style={{color: '#311212'}}>
                     {account.bank}
                   </h3>
-                  <div className="w-12 h-8 rounded flex items-center justify-center" style={{backgroundColor: '#F3E2D7'}}>
-                    <div className="w-6 h-4 rounded-sm" style={{backgroundColor: '#C6B283'}}></div>
-                  </div>
+                  {getBankLogo(account.bank)}
                 </div>
                 
                 <div className="space-y-2 mb-4">

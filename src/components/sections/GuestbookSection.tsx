@@ -11,6 +11,7 @@ import { ParallaxWrapper } from '@/components/animations/ParallaxWrapper';
 import { MessageCircle, Clock } from 'lucide-react';
 
 export function GuestbookSection() {
+  const invitation = useWeddingStore((state) => state.invitation);
   const guestbookEntries = useWeddingStore((state) => state.guestbookEntries);
   const isGuestbookLoading = useWeddingStore((state) => state.isGuestbookLoading);
   const guestbookError = useWeddingStore((state) => state.guestbookError);
@@ -26,6 +27,16 @@ export function GuestbookSection() {
   const [showAll, setShowAll] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const unsubscribeRef = useRef<(() => void) | null>(null);
+
+  // Auto-fill guest name from URL parameter
+  useEffect(() => {
+    if (invitation?.guestName && !formData.guestName) {
+      setFormData(prev => ({
+        ...prev,
+        guestName: invitation.guestName || ''
+      }));
+    }
+  }, [invitation?.guestName, formData.guestName]);
 
   // Set up real-time listener on component mount
   useEffect(() => {
@@ -83,9 +94,9 @@ export function GuestbookSection() {
         message: 'Terima kasih atas ucapan dan doa Anda!'
       });
 
-      // Reset form
+      // Reset form but keep guest name from URL if it exists
       setFormData({
-        guestName: '',
+        guestName: invitation?.guestName || '',
         message: '',
         attendanceStatus: undefined,
       });

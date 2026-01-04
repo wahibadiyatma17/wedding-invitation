@@ -28,6 +28,11 @@ export function HeroSection() {
 
   const { couple } = invitation;
 
+  // Auto-detect date: use event date if only one event, otherwise use couple.weddingDate
+  const displayDate = invitation.events.length === 1
+    ? invitation.events[0].date
+    : couple.weddingDate;
+
   return (
     <section id="hero-section" className="relative lg:bg-none overflow-hidden" style={{background: 'linear-gradient(135deg, #FDF1E9 0%, #F3E2D7 50%, #BFAB97 100%)'}}>
       {/* Mobile Dynamic Background */}
@@ -36,7 +41,7 @@ export function HeroSection() {
           <div
             key={index}
             className={`absolute inset-0 transition-opacity duration-1000 ${
-              index === currentBgIndex ? 'opacity-30' : 'opacity-0'
+              index === currentBgIndex ? 'opacity-20' : 'opacity-0'
             }`}
           >
             <Image
@@ -52,24 +57,6 @@ export function HeroSection() {
       </div>
 
       <div className="relative z-10 px-4 py-5 lg:px-6 lg:py-8 max-w-full">
-        
-        {/* Guest Name Section */}
-        {invitation.guestName && (
-          <div className={`mb-6 transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
-            <div className="bg-white/90 backdrop-blur-md border rounded-xl px-4 py-3 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-[1.02]" style={{borderColor: '#BFAB97'}}>
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-linear-to-r from-[#7F5F45] to-[#C6B283] rounded-full animate-pulse"></div>
-                <p className="text-xs font-wedding-body mb-1" style={{color: '#381516'}}>
-                  Kepada Yth. 
-                </p>
-              </div>
-              <p className="text-base font-wedding-elegant font-semibold" style={{color: '#311212'}}>
-                {invitation.guestName}
-              </p>
-            </div>
-          </div>
-        )}
-
         {/* Main Couple Introduction */}
         <div className={`mb-8 text-center transform transition-all duration-1000 delay-200 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
           <div className="mb-5">
@@ -90,11 +77,11 @@ export function HeroSection() {
             <div className="inline-flex items-center space-x-2 bg-white/70 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg">
               <div className="w-2 h-2 bg-linear-to-r from-[#C6B283] to-[#D6CB94] rounded-full"></div>
               <p className="text-sm lg:text-base font-wedding-body" style={{color: '#381516'}}>
-                {couple.weddingDate.toLocaleDateString('id-ID', { 
-                  weekday: 'long', 
-                  year: 'numeric', 
-                  month: 'long', 
-                  day: 'numeric' 
+                {displayDate.toLocaleDateString('id-ID', {
+                  weekday: 'long',
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
                 })}
               </p>
               <div className="w-2 h-2 bg-linear-to-r from-[#C6B283] to-[#D6CB94] rounded-full"></div>
@@ -111,7 +98,7 @@ export function HeroSection() {
                 <div className="absolute inset-0 rounded-full p-0.5" style={{background: 'linear-gradient(135deg, #C6B283, #D6CB94)'}}>
                   <div className="w-full h-full bg-white rounded-full overflow-hidden shadow-lg">
                     <Image 
-                      src="/images/pre-wedding-images/22.jpg"
+                      src="/images/ery.png"
                       alt={couple.bride.name}
                       className="w-full h-full object-cover"
                       width={112}
@@ -137,7 +124,7 @@ export function HeroSection() {
                 <div className="absolute inset-0 rounded-full p-0.5" style={{background: 'linear-gradient(135deg, #C6B283, #D6CB94)'}}>
                   <div className="w-full h-full bg-white rounded-full overflow-hidden shadow-lg">
                     <Image 
-                      src="/images/pre-wedding-images/21.jpg"
+                      src="/images/aji.png"
                       alt={couple.groom.name}
                       className="w-full h-full object-cover"
                       width={112}
@@ -161,7 +148,7 @@ export function HeroSection() {
           <div className="mb-6 animate-fadeInUp" style={{animationDelay: '0.6s'}}>
             <div className="bg-white/60 backdrop-blur-sm rounded-lg p-4 border" style={{borderColor: 'rgba(191, 171, 151, 0.5)'}}>
               <p className="font-wedding-script text-sm lg:text-base leading-relaxed italic text-center" style={{color: '#7F5F45'}}>
-                &ldquo;{couple.spiritualQuote}&rdquo;
+                &ldquo;{couple.spiritualQuote}&rdquo; (Q.S. Ar-Ruum : 21)
               </p>
             </div>
           </div>
