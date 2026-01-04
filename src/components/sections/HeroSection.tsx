@@ -48,7 +48,7 @@ export function HeroSection() {
             />
           </div>
         ))}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-white/40"></div>
+        <div className="absolute inset-0 bg-linear-to-b from-transparent via-white/10 to-white/40"></div>
       </div>
 
       <div className="relative z-10 px-4 py-5 lg:px-6 lg:py-8 max-w-full">
@@ -58,7 +58,7 @@ export function HeroSection() {
           <div className={`mb-6 transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
             <div className="bg-white/90 backdrop-blur-md border rounded-xl px-4 py-3 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-[1.02]" style={{borderColor: '#BFAB97'}}>
               <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-gradient-to-r from-[#7F5F45] to-[#C6B283] rounded-full animate-pulse"></div>
+                <div className="w-2 h-2 bg-linear-to-r from-[#7F5F45] to-[#C6B283] rounded-full animate-pulse"></div>
                 <p className="text-xs font-wedding-body mb-1" style={{color: '#381516'}}>
                   Kepada Yth. 
                 </p>
@@ -73,11 +73,11 @@ export function HeroSection() {
         {/* Main Couple Introduction */}
         <div className={`mb-8 text-center transform transition-all duration-1000 delay-200 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
           <div className="mb-5">
-            <div className="w-8 h-0.5 mx-auto mb-3 bg-gradient-to-r from-transparent via-[#7F5F45] to-transparent"></div>
+            <div className="w-8 h-0.5 mx-auto mb-3 bg-linear-to-r from-transparent via-[#7F5F45] to-transparent"></div>
             <p className="text-xs font-wedding-body tracking-[0.2em] uppercase mb-2" style={{color: '#381516'}}>
               The Wedding of
             </p>
-            <div className="w-8 h-0.5 mx-auto bg-gradient-to-r from-transparent via-[#7F5F45] to-transparent"></div>
+            <div className="w-8 h-0.5 mx-auto bg-linear-to-r from-transparent via-[#7F5F45] to-transparent"></div>
           </div>
           
           <h1 className="text-2xl lg:text-4xl font-wedding-elegant mb-3 leading-tight" style={{color: '#311212'}}>
@@ -88,7 +88,7 @@ export function HeroSection() {
           
           <div className={`transform transition-all duration-700 delay-600 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
             <div className="inline-flex items-center space-x-2 bg-white/70 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg">
-              <div className="w-2 h-2 bg-gradient-to-r from-[#C6B283] to-[#D6CB94] rounded-full"></div>
+              <div className="w-2 h-2 bg-linear-to-r from-[#C6B283] to-[#D6CB94] rounded-full"></div>
               <p className="text-sm lg:text-base font-wedding-body" style={{color: '#381516'}}>
                 {couple.weddingDate.toLocaleDateString('id-ID', { 
                   weekday: 'long', 
@@ -97,14 +97,14 @@ export function HeroSection() {
                   day: 'numeric' 
                 })}
               </p>
-              <div className="w-2 h-2 bg-gradient-to-r from-[#C6B283] to-[#D6CB94] rounded-full"></div>
+              <div className="w-2 h-2 bg-linear-to-r from-[#C6B283] to-[#D6CB94] rounded-full"></div>
             </div>
           </div>
         </div>
 
         {/* Couple Photos - Optimized for 450px */}
         <div className="mb-8 animate-scaleIn" style={{animationDelay: '0.4s'}}>
-          <div className="flex items-center justify-center gap-3 lg:gap-6">
+          <div className="flex flex-col-reverse items-center justify-center gap-3 lg:gap-4">
             {/* Bride Photo */}
             <div className="text-center flex-1">
               <div className="relative w-20 h-20 lg:w-28 lg:h-28 mx-auto mb-2">
@@ -120,11 +120,11 @@ export function HeroSection() {
                   </div>
                 </div>
               </div>
-              <h3 className="text-sm lg:text-base font-wedding-elegant mb-1 leading-tight" style={{color: '#311212'}}>{couple.bride.fullName}</h3>
-              <p className="text-xs font-wedding-body leading-tight" style={{color: '#8B6914'}}>
+              <h3 className="text-base lg:text-base font-wedding-elegant font-semibold mb-1 leading-tight" style={{color: '#311212'}}>{couple.bride.fullName}</h3>
+              <p className="text-sm font-wedding-body leading-tight" style={{color: '#8B6914'}}>
                 Putri dari<br />
-                <span className="font-medium">{couple.bride.parents.father}</span><br />
-                <span className="font-medium">{couple.bride.parents.mother}</span>
+                <span className="text-sm font-medium">{couple.bride.parents.father}</span><br />
+                <span className="text-sm font-medium">{couple.bride.parents.mother}</span>
               </p>
             </div>
             
@@ -146,11 +146,11 @@ export function HeroSection() {
                   </div>
                 </div>
               </div>
-              <h3 className="text-sm lg:text-base font-wedding-elegant mb-1 leading-tight" style={{color: '#311212'}}>{couple.groom.fullName}</h3>
-              <p className="text-xs font-wedding-body leading-tight" style={{color: '#8B6914'}}>
+              <h3 className="text-base lg:text-base font-wedding-elegant mb-1 leading-tight font-semibold" style={{color: '#311212'}}>{couple.groom.fullName}</h3>
+              <p className="text-sm font-wedding-body leading-tight" style={{color: '#8B6914'}}>
                 Putra dari<br />
-                <span className="font-medium">{couple.groom.parents.father}</span><br />
-                <span className="font-medium">{couple.groom.parents.mother}</span>
+                <span className="text-sm font-medium">{couple.groom.parents.father}</span><br />
+                <span className="text-sm font-medium">{couple.groom.parents.mother}</span>
               </p>
             </div>
           </div>

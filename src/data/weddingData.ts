@@ -69,53 +69,47 @@ export const weddingData: WeddingInvitation = {
         end: '11:00'
       },
       venue: {
-        name: 'Ds. Silog, Desa Tlogolalo, Kec. Kaliwungu, Kab. Purworejo',
-        address: 'Desa Silog, Kec. Kaliwungu, Kabupaten Purworejo',
-        mapUrl: 'https://maps.google.com'
+        name: 'Dsn. Silegi, Desa Tlogobulu, Kec. Kaligesing, Kab. Purworejo',
+        address: 'Dsn. Silegi, Desa Tlogobulu, Kec. Kaligesing, Kab. Purworejo',
+        mapUrl: 'https://maps.google.com',
+        coordinates: {
+          lat: -7.7000,
+          lng: 110.1100
+        }
       }
     },
     {
       id: 'resepsi-1',
       type: 'resepsi',
-      title: 'Resepsi Pernikahan - Sesi 1',
+      title: 'Ngunduh Mantu',
       date: new Date('2026-01-24T10:00:00'),
       time: {
         start: '10:00',
-        end: '12:00'
-      },
-      venue: {
-        name: 'Gedung Ganesha Purworejo',
-        address: 'Jl. Kel Sumeron No.62, Kec. Kajen, Kab. Purworejo',
-        mapUrl: 'https://maps.google.com'
-      }
-    },
-    {
-      id: 'resepsi-2',
-      type: 'resepsi',
-      title: 'Resepsi Pernikahan - Sesi 2',
-      date: new Date('2026-01-24T12:00:00'),
-      time: {
-        start: '12:00',
         end: '14:00'
       },
       venue: {
         name: 'Gedung Ganesha Purworejo',
-        address: 'Jl. Kel Sumeron No.62, Kec. Kajen, Kab. Purworejo',
-        mapUrl: 'https://maps.google.com'
+        address: 'JL. Kol Sugiono No.62, Kepatihan, Purworejo',
+        mapUrl: 'https://maps.app.goo.gl/DpDQwQRAfNjuNgin9',
+        coordinates: {
+          lat: -7.7097322,
+          lng: 110.0143547
+        }
       }
-    }
+    },
+    
   ],
   gifts: {
     bankAccounts: [
       {
-        bank: 'Bank Mandiri',
-        accountNumber: '1234567890',
-        accountName: 'Khofifah Ery'
+        bank: 'Bank BRI',
+        accountNumber: '007801063270504',
+        accountName: 'Akhmad Lutfiyan Aji'
       },
       {
         bank: 'Bank BCA',
-        accountNumber: '0987654321',
-        accountName: 'Akhmad Lutfiyan Aji'
+        accountNumber: '2350620691',
+        accountName: 'Khofifah Ery Nur Aeini'
       }
     ],
     message: 'Kehadiran dan doa restu Anda adalah hadiah terbesar bagi kami. Namun jika ingin memberikan hadiah, Anda dapat mengirimkannya melalui:'

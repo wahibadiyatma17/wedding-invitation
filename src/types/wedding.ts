@@ -39,6 +39,10 @@ export interface WeddingEvent {
     name: string;
     address: string;
     mapUrl?: string;
+    coordinates?: {
+      lat: number;
+      lng: number;
+    };
   };
 }
 

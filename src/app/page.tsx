@@ -8,8 +8,8 @@ import Image from 'next/image';
 
 import { OpeningSection } from '@/components/sections/OpeningSection';
 import { HeroSection } from '@/components/sections/HeroSection';
-import { CountdownSection } from '@/components/sections/CountdownSection';
 import { EventSection } from '@/components/sections/EventSection';
+import { EventMapSection } from '@/components/sections/EventMapSection';
 import { GallerySection } from '@/components/sections/GallerySection';
 import { GiftSection } from '@/components/sections/GiftSection';
 import { GuestbookSection } from '@/components/sections/GuestbookSection';
@@ -97,18 +97,18 @@ function HomeContent() {
           </ScrollReveal>
 
           <ScrollReveal direction="up" delay={100} threshold={0.15}>
-            <CountdownSection />
-          </ScrollReveal>
-
-          <ScrollReveal direction="up" delay={150} threshold={0.15}>
             <EventSection />
           </ScrollReveal>
 
-          <ScrollReveal direction="up" delay={200} threshold={0.15}>
+          <ScrollReveal direction="up" delay={125} threshold={0.15}>
+            <EventMapSection />
+          </ScrollReveal>
+
+          <ScrollReveal direction="up" delay={150} threshold={0.15}>
             <GallerySection />
           </ScrollReveal>
 
-          <ScrollReveal direction="up" delay={250} threshold={0.15}>
+          <ScrollReveal direction="up" delay={200} threshold={0.15}>
             <GiftSection />
           </ScrollReveal>
 

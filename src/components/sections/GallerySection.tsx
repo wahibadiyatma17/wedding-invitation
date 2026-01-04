@@ -24,38 +24,24 @@ const galleryImages = [
   '/images/pre-wedding-images/16.jpg',
   '/images/pre-wedding-images/17.jpg',
   '/images/pre-wedding-images/18.jpg',
+  '/images/pre-wedding-images/19.jpg',
+  '/images/pre-wedding-images/20.jpg',
+  '/images/pre-wedding-images/21.jpg',
+  '/images/pre-wedding-images/22.jpg',
+  '/images/pre-wedding-images/23.jpg',
+  '/images/pre-wedding-images/24.jpg',
+  '/images/pre-wedding-images/25.jpg',
+  '/images/pre-wedding-images/27.jpg',
+  '/images/pre-wedding-images/28.jpg',
+  '/images/pre-wedding-images/29.jpg',
+  '/images/pre-wedding-images/30.jpg',
+  '/images/pre-wedding-images/31.jpg',
+  '/images/pre-wedding-images/32.jpg',
+  '/images/pre-wedding-images/33.jpg',
   '/images/pre-wedding-images/34.jpg',
   '/images/pre-wedding-images/35.jpg',
   '/images/pre-wedding-images/37.jpg',
   '/images/pre-wedding-images/38.jpg',
-  '/images/pre-wedding-images/39.jpg'
-];
-
-// Photo captions with detailed descriptions reflecting each moment
-const photoCaptions = [
-  { title: 'Awal Perjalanan Cinta', subtitle: 'Ketika mata pertama kali bertemu, hati sudah berbisik' },
-  { title: 'Tawa yang Menawan', subtitle: 'Keceriaan yang tulus dalam setiap momen kebersamaan' },
-  { title: 'Hangatnya Pelukan', subtitle: 'Dalam dekapan ini, dunia terasa sempurna' },
-  { title: 'Senyuman Kebahagiaan', subtitle: 'Pancaran cahaya cinta dari dalam hati' },
-  { title: 'Janji di Antara Bunga', subtitle: 'Keindahan alam menyaksikan ikrar cinta yang tulus' },
-  { title: 'Momen Ketenangan', subtitle: 'Bersama denganmu, waktu seakan berhenti' },
-  { title: 'Canda dan Tawa', subtitle: 'Berbagi kegembiraan dalam setiap detik bersama' },
-  { title: 'Tatapan Penuh Makna', subtitle: 'Mata yang saling memahami tanpa kata' },
-  { title: 'Kebersamaan yang Sejati', subtitle: 'Dua jiwa yang menyatu dalam harmoni' },
-  { title: 'Kemesraan di Senja', subtitle: 'Indahnya cinta diwarnai cahaya mentari sore' },
-  { title: 'Kelembutan Hati', subtitle: 'Sentuhan kasih yang menyentuh jiwa terdalam' },
-  { title: 'Berbagi Mimpi', subtitle: 'Merajut harapan untuk masa depan bersama' },
-  { title: 'Spontanitas Cinta', subtitle: 'Kebahagiaan yang meluap dalam setiap gerakan' },
-  { title: 'Kehangatan Berdua', subtitle: 'Rasa aman dan nyaman dalam pelukan cinta' },
-  { title: 'Pesona Alami', subtitle: 'Kecantikan cinta yang bersinar natural' },
-  { title: 'Saat-saat Berharga', subtitle: 'Kenangan indah yang akan selalu diingat' },
-  { title: 'Romantisme Sejati', subtitle: 'Cinta yang terpancar dari setiap sudut hati' },
-  { title: 'Kedamaian Bersama', subtitle: 'Menemukan ketenangan dalam cinta yang tulus' },
-  { title: 'Impian Menjadi Nyata', subtitle: 'Ketika harapan terindah terwujud bersama' },
-  { title: 'Kasih yang Abadi', subtitle: 'Cinta yang akan bertahan hingga akhir waktu' },
-  { title: 'Senja Romantis', subtitle: 'Indahnya cinta ditemani cahaya emas senja' },
-  { title: 'Fajar Kebahagiaan', subtitle: 'Awal yang baru penuh harapan dan cinta' },
-  { title: 'Cinta yang Sempurna', subtitle: 'Takdir terindah yang dipersembahkan Tuhan' }
 ];
 
 export function GallerySection() {
@@ -277,7 +263,7 @@ export function GallerySection() {
               <div className="relative h-full w-full">
                 <Image
                   src={galleryImages[item]}
-                  alt={photoCaptions[item]?.title || `Wedding photo ${item + 1}`}
+                  alt={`Wedding photo ${item + 1}`}
                   fill
                   className="object-cover"
                   priority={item === currentSlide}

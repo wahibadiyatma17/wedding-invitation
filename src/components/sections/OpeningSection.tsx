@@ -70,7 +70,7 @@ export function OpeningSection() {
           {/* Mobile Background Image (only visible on mobile) */}
           <div className="absolute inset-0 lg:hidden">
             <Image
-              src="/images/pre-wedding-images/36.jpg"
+              src="/images/pre-wedding-images/5.jpg"
               alt="Wedding background"
               fill
               className="object-cover"

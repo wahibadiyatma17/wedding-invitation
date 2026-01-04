@@ -161,13 +161,13 @@ export function GuestbookSection() {
         <ParallaxWrapper speed={0.05} direction="down">
           <div className="relative w-full h-full">
             <Image
-              src="/images/pre-wedding-images/36.jpg"
+              src="/images/pre-wedding-images/1.jpg"
               alt="Guestbook Background"
               fill
               className="object-cover"
               sizes="100vw"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-wedding-dark/90 via-wedding-dark/85 to-wedding-dark/90" />
+            <div className="absolute inset-0 bg-linear-to-b from-wedding-dark/90 via-wedding-dark/85 to-wedding-dark/90" />
           </div>
         </ParallaxWrapper>
       </div>
@@ -177,9 +177,9 @@ export function GuestbookSection() {
         <ScrollReveal direction="fade" duration={300}>
           <div className="text-center mb-12 md:mb-16">
             <div className="flex items-center justify-center gap-4 mb-4">
-              <div className="h-px w-12 md:w-20 bg-gradient-to-r from-transparent to-wedding-gold" />
+              <div className="h-px w-12 md:w-20 bg-linear-to-r from-transparent to-wedding-gold" />
               <MessageCircle className="w-6 h-6 text-wedding-gold" />
-              <div className="h-px w-12 md:w-20 bg-gradient-to-l from-transparent to-wedding-gold" />
+              <div className="h-px w-12 md:w-20 bg-linear-to-l from-transparent to-wedding-gold" />
             </div>
             <h2 className="font-wedding-elegant text-3xl md:text-5xl text-wedding-cream mb-4">
               RSVP
