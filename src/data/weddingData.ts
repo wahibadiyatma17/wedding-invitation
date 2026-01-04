@@ -115,5 +115,5 @@ export const weddingData: WeddingInvitation = {
     message: 'Kehadiran dan doa restu Anda adalah hadiah terbesar bagi kami. Namun jika ingin memberikan hadiah, Anda dapat mengirimkannya melalui:'
   },
   guestbookEntries: [],
-  musicUrl: '/audio/wedding-song.mp3'
+  musicUrl: '/sound/bermuara.mp3'
 };

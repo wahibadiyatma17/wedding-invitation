@@ -14,7 +14,7 @@ import { GallerySection } from '@/components/sections/GallerySection';
 import { GiftSection } from '@/components/sections/GiftSection';
 import { GuestbookSection } from '@/components/sections/GuestbookSection';
 
-import { AudioPlayer } from '@/components/ui/AudioPlayer';
+import { MusicControl } from '@/components/ui/MusicControl';
 import { Modal } from '@/components/ui/Modal';
 import { ToastContainer } from '@/components/ui/Toast';
 import { ScrollReveal } from '@/components/animations/ScrollReveal';
@@ -136,7 +136,7 @@ export function InvitationPageContent({ eventFilter }: InvitationPageContentProp
         </div>
       </div>
 
-      {weddingData.musicUrl && <AudioPlayer src={weddingData.musicUrl} />}
+      {weddingData.musicUrl && <MusicControl src={weddingData.musicUrl} />}
 
       <Modal />
       <ToastContainer />

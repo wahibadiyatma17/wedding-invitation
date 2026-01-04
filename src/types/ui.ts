@@ -14,6 +14,10 @@ export interface AudioPlayerState {
   currentTime: number;
   duration: number;
   volume: number;
+  isMuted: boolean;
+  isFading: boolean;
+  autoplayAttempted: boolean;
+  autoplayBlocked: boolean;
 }
 
 export interface ToastMessage {
