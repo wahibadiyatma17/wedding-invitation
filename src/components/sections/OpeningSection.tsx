@@ -62,11 +62,24 @@ export function OpeningSection() {
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/40" />
+          <div className="absolute inset-0 bg-linear-to-r from-black/20 via-transparent to-black/40" />
         </div>
 
         {/* Right Side - Content (450px max width) */}
-        <div className="min-h-screen lg:relative lg:w-[450px] lg:flex-shrink-0" style={{background: 'linear-gradient(135deg, #FDF1E9 0%, #F3E2D7 50%, #BFAB97 100%)'}}>
+        <div className="min-h-screen lg:relative lg:w-[450px] lg:shrink-0 relative" style={{background: 'linear-gradient(135deg, #FDF1E9 0%, #F3E2D7 50%, #BFAB97 100%)'}}>
+          {/* Mobile Background Image (only visible on mobile) */}
+          <div className="absolute inset-0 lg:hidden">
+            <Image
+              src="/images/pre-wedding-images/36.jpg"
+              alt="Wedding background"
+              fill
+              className="object-cover"
+              priority
+            />
+            {/* Soft overlay for text readability */}
+            <div className="absolute inset-0 bg-linear-to-b from-wedding-cream/30 via-wedding-beige/75 to-wedding-cream/30" />
+          </div>
+
           <div className="relative z-10 min-h-screen flex items-center justify-center px-4 py-5 lg:px-8">
             <div className="text-center text-white w-full max-w-sm" style={{color: '#311212'}}>
               
