@@ -50,11 +50,11 @@ export async function addGuestbookEntry(entry: CreateGuestbookEntry): Promise<st
     if (!entry.guestName.trim()) {
       throw new Error('Guest name is required');
     }
-    
-    if (!entry.message.trim() || entry.message.length < 10) {
-      throw new Error('Message must be at least 10 characters long');
+
+    if (!entry.message.trim()) {
+      throw new Error('Message is required');
     }
-    
+
     if (entry.message.length > 500) {
       throw new Error('Message must be less than 500 characters');
     }

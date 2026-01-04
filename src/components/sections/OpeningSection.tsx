@@ -131,7 +131,7 @@ export function OpeningSection() {
                   <p className="text-sm font-wedding-body mb-2" style={{color: '#381516'}}>
                     Bapak/Ibu/Saudara/i
                   </p>
-                  <p className="text-2xl lg:text-3xl font-wedding-elegant font-bold mb-2" style={{color: '#311212'}}>
+                  <p className="text-xl lg:text-2xl font-wedding-elegant font-bold mb-2" style={{color: '#311212'}}>
                     {invitation.guestName}
                   </p>
                   <p className="text-sm font-wedding-body" style={{color: '#381516'}}>

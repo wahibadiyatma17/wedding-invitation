@@ -53,7 +53,7 @@ export function GuestbookSection() {
     };
   }, [subscribeToGuestbookUpdates]);
 
-  const displayedEntries = showAll ? guestbookEntries : guestbookEntries.slice(0, 10);
+  const displayedEntries = showAll ? guestbookEntries : guestbookEntries.slice(0, 7);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -63,8 +63,8 @@ export function GuestbookSection() {
       return;
     }
 
-    if (!formData.message.trim() || formData.message.length < 10) {
-      addToast({ type: 'error', message: 'Pesan minimal 10 karakter' });
+    if (!formData.message.trim()) {
+      addToast({ type: 'error', message: 'Mohon isi pesan Anda' });
       return;
     }
 
@@ -378,15 +378,15 @@ export function GuestbookSection() {
                 </div>
 
                 {/* Load More Button */}
-                {!showAll && guestbookEntries.length > 10 && (
+                {!showAll && guestbookEntries.length > 7 && (
                   <ScrollReveal direction="fade" duration={300}>
                     <div className="text-center pt-4">
                       <Button
                         variant="outline"
                         onClick={() => setShowAll(true)}
-                        className="min-h-[44px]"
+                        className="min-h-[44px] text-white"
                       >
-                        Lihat Semua ({guestbookEntries.length - 10} lainnya)
+                        Lihat Semua ({guestbookEntries.length - 7} lainnya)
                       </Button>
                     </div>
                   </ScrollReveal>
