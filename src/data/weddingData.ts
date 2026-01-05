@@ -65,8 +65,8 @@ export const weddingData: WeddingInvitation = {
       title: 'Akad Nikah',
       date: new Date('2026-01-19T10:00:00'),
       time: {
-        start: '10:00',
-        end: '11:00'
+        start: '08:00 WIB',
+        end: 'Selesai'
       },
       venue: {
         name: 'Dsn. Silegi, Desa Tlogobulu, Kec. Kaligesing, Kab. Purworejo',
@@ -85,7 +85,7 @@ export const weddingData: WeddingInvitation = {
       date: new Date('2026-01-24T10:00:00'),
       time: {
         start: '10:00',
-        end: '14:00'
+        end: '14:00 WIB'
       },
       venue: {
         name: 'Gedung Ganesha Purworejo',
@@ -115,5 +115,5 @@ export const weddingData: WeddingInvitation = {
     message: 'Kehadiran dan doa restu Anda adalah hadiah terbesar bagi kami. Namun jika ingin memberikan hadiah, Anda dapat mengirimkannya melalui:'
   },
   guestbookEntries: [],
-  musicUrl: '/sound/bermuara.mp3'
+  musicUrl: '/sound/muara.mp3'
 };

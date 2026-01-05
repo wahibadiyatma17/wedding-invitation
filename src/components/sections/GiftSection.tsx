@@ -83,7 +83,7 @@ export function GiftSection() {
           <div className="w-24 h-0.5 mx-auto" style={{background: 'linear-gradient(90deg, transparent, #C6B283, transparent)'}}></div>
         </div>
         
-        <Card className="animate-scaleIn" style={{animationDelay: '0.2s'}}>
+        <Card className="animate-scaleIn p-4" style={{animationDelay: '0.2s'}}>
           {gifts.message && (
             <div className="mb-8">
               <p className="leading-relaxed" style={{color: '#381516'}}>
@@ -94,7 +94,7 @@ export function GiftSection() {
           
           <div className="space-y-6">
             {gifts.bankAccounts.map((account, index) => (
-              <div key={index} className="border rounded-lg p-6 bg-white/80 backdrop-blur-sm" style={{borderColor: '#BFAB97'}}>
+              <div key={index} className="border rounded-lg p-4 bg-white/80 backdrop-blur-sm" style={{borderColor: '#BFAB97'}}>
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-lg font-semibold font-wedding-elegant" style={{color: '#311212'}}>
                     {account.bank}
@@ -104,14 +104,14 @@ export function GiftSection() {
                 
                 <div className="space-y-2 mb-4">
                   <div className="flex justify-between items-center">
-                    <span className="font-wedding-body" style={{color: '#7F5F45'}}>Nomor Rekening:</span>
-                    <span className="font-mono font-semibold" style={{color: '#311212'}}>
+                    <span className="font-wedding-body text-sm" style={{color: '#7F5F45'}}>Nomor Rekening:</span>
+                    <span className="font-mono font-semibold text-sm" style={{color: '#311212'}}>
                       {account.accountNumber}
                     </span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="font-wedding-body" style={{color: '#7F5F45'}}>Atas Nama:</span>
-                    <span className="font-semibold" style={{color: '#311212'}}>
+                    <span className="font-wedding-body text-sm" style={{color: '#7F5F45'}}>Atas Nama:</span>
+                    <span className="font-semibold text-sm" style={{color: '#311212'}}>
                       {account.accountName}
                     </span>
                   </div>
@@ -129,7 +129,7 @@ export function GiftSection() {
             ))}
           </div>
           
-          <div className="mt-8 p-4 backdrop-blur-sm rounded-lg border" style={{backgroundColor: 'rgba(243, 226, 215, 0.7)', borderColor: '#BFAB97'}}>
+          <div className="mt-6 p-4 backdrop-blur-sm rounded-lg border" style={{backgroundColor: 'rgba(243, 226, 215, 0.7)', borderColor: '#BFAB97'}}>
             <p className="text-sm font-wedding-body" style={{color: '#381516'}}>
               Terima kasih atas kebaikan dan perhatian Anda
             </p>

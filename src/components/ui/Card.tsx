@@ -43,7 +43,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
           cardVariants({ variant, size }),
           {
             'hover-lift': hover,
-            'before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent before:-skew-x-12 before:-translate-x-full hover:before:animate-shimmer': 
+            'before:absolute before:inset-0 before:bg-linear-to-r before:from-transparent before:via-white/20 before:to-transparent before:-skew-x-12 before:-translate-x-full hover:before:animate-shimmer': 
               variant !== 'transparent'
           },
           className

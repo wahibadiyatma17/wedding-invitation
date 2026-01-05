@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { Music } from 'lucide-react';
 import { useUIStore } from '@/stores/uiStore';
 import { useAudioFade } from '@/hooks/useAudioFade';
@@ -147,8 +148,8 @@ export function MusicControl({ src }: MusicControlProps) {
         onClick={handleToggle}
         disabled={isFading}
         className={`
-          fixed bottom-4 right-4 z-40
-          w-12 h-12 rounded-full shadow-lg
+          fixed bottom-4 right-4 z-50
+          w-12 h-12 sm:w-12 sm:h-12 rounded-full shadow-lg
           bg-wedding-primary/90 backdrop-blur-sm
           text-wedding-cream
           hover:bg-wedding-primary hover:scale-110
@@ -162,7 +163,7 @@ export function MusicControl({ src }: MusicControlProps) {
         aria-pressed={audioPlayer.isPlaying}
       >
         <Music
-          className={`w-6 h-6 ${audioPlayer.isPlaying ? '' : 'opacity-60'}`}
+          className={`w-7 h-7 sm:w-6 sm:h-6 ${audioPlayer.isPlaying ? '' : 'opacity-60'}`}
           strokeWidth={2}
         />
       </button>
