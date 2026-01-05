@@ -6,7 +6,7 @@ export function useShare() {
   const addToast = useUIStore((state) => state.addToast);
 
   const getShareData = () => ({
-    title: 'Undangan Pernikahan Ajik & Ery',
+    title: 'Undangan Pernikahan Aji & Ery',
     text: 'Anda diundang ke pernikahan kami! 💒',
     url: typeof window !== 'undefined' ? window.location.href : ''
   });

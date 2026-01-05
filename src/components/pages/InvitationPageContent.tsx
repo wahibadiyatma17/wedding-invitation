@@ -100,7 +100,7 @@ export function InvitationPageContent({ eventFilter }: InvitationPageContentProp
             <h1 className="text-2xl font-wedding-elegant mb-2 tracking-wide opacity-90">
               THE WEDDING OF
             </h1>
-            <p className="text-5xl font-wedding-script leading-tight">Ajik & Ery</p>
+            <p className="text-5xl font-wedding-script leading-tight">Aji & Ery</p>
             <p className="text-base font-wedding-body mt-4 opacity-80 tracking-wider">
               24 . 01 . 2026
             </p>

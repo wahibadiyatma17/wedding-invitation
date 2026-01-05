@@ -8,16 +8,16 @@ export const weddingData: WeddingInvitation = {
       photo: '/images/bride.jpg',
       parents: {
         father: 'Bapak Pribadi & Ibu Karsinah (Almh)',
-        mother: 'Ibu Supriyani, S.Pd'
+        mother: 'Ibu Supriyani'
       }
     },
     groom: {
-      name: 'Ajik',
+      name: 'Aji',
       fullName: 'Akhmad Lutfiyan Aji, S.T, S.H',
       photo: '/images/groom.jpg',
       parents: {
         father: 'Bapak H. Muhlasin',
-        mother: 'Ibu Hj. Zulmartati'
+        mother: 'Ibu Hj. Zulinartati'
       }
     },
     weddingDate: new Date('2026-01-24'),
