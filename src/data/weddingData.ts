@@ -88,7 +88,7 @@ export const weddingData: WeddingInvitation = {
         end: '14:00 WIB'
       },
       venue: {
-        name: 'Gedung Ganesha Purworejo',
+        name: 'Ganeca Convention Hall',
         address: 'JL. Kol Sugiono No.62, Kepatihan, Purworejo',
         mapUrl: 'https://maps.app.goo.gl/DpDQwQRAfNjuNgin9',
         coordinates: {
