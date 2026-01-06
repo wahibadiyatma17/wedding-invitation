@@ -46,7 +46,7 @@ export function EventSection() {
             Acara Pernikahan
           </h2>
           <p className="text-sm lg:text-base font-wedding-body text-wedding-dark/70 italic">
-            Dengan senang hati kami mengundang Anda
+            Dengan senang hati kami mengundang Bapak/Ibu/Saudara/i
           </p>
         </div>
 

@@ -8,16 +8,16 @@ export const weddingData: WeddingInvitation = {
       photo: '/images/bride.jpg',
       parents: {
         father: 'Bapak Pribadi & Ibu Karsinah (Almh)',
-        mother: 'Ibu Supriyani'
+        mother: 'Ibu Supriyani, S.Pd'
       }
     },
     groom: {
-      name: 'Aji',
-      fullName: 'Akhmad Lutfiyan Aji, S.T, S.H',
+      name: 'Ajik',
+      fullName: 'Akhmad Lutfiyan Aji, S.T.,S.H',
       photo: '/images/groom.jpg',
       parents: {
-        father: 'Bapak H. Muhlasin',
-        mother: 'Ibu Hj. Zulinartati'
+        father: 'Bapak H. Muhlasin, S.Pd.,M.Pd ',
+        mother: 'Ibu Hj. Zulinartati, S.Pd'
       }
     },
     weddingDate: new Date('2026-01-24'),
@@ -112,7 +112,7 @@ export const weddingData: WeddingInvitation = {
         accountName: 'Khofifah Ery Nur Aeini'
       }
     ],
-    message: 'Kehadiran dan doa restu Anda adalah hadiah terbesar bagi kami. Namun jika ingin memberikan hadiah, Anda dapat mengirimkannya melalui:'
+    message: 'Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Dan jika memberi adalah ungkapan tanda kasih Anda, Anda dapat memberi kado secara cashless.'
   },
   guestbookEntries: [],
   musicUrl: '/sound/muara.mp3'

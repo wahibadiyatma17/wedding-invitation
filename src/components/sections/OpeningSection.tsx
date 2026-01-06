@@ -47,9 +47,9 @@ export function OpeningSection() {
       
       // Ensure we're at the top
       window.scrollTo(0, 0);
-      const heroSection = document.getElementById('hero-section');
-      if (heroSection) {
-        heroSection.scrollIntoView({ behavior: 'auto' });
+      const coupleIntroSection = document.getElementById('couple-intro-section');
+      if (coupleIntroSection) {
+        coupleIntroSection.scrollIntoView({ behavior: 'auto' });
       }
     }, 800); // Match animation duration exactly
   };
@@ -100,13 +100,13 @@ export function OpeningSection() {
               {/* Names */}
               <div className="mb-6">
                 <h1 className="text-4xl md:text-5xl lg:text-4xl font-wedding-elegant text-white mb-3" style={{color: '#311212'}}>
-                  {couple.bride.name}
+                  {couple.groom.name}
                 </h1>
                 <div className="text-3xl md:text-4xl lg:text-3xl text-white/90 font-wedding-script my-3" style={{color: '#7F5F45'}}>
                   &
                 </div>
                 <h1 className="text-4xl md:text-5xl lg:text-4xl font-wedding-elegant text-white mb-4" style={{color: '#311212'}}>
-                  {couple.groom.name}
+                  {couple.bride.name}
                 </h1>
               </div>
 
@@ -133,9 +133,6 @@ export function OpeningSection() {
                   </p>
                   <p className="text-xl lg:text-2xl font-wedding-elegant font-bold mb-2" style={{color: '#311212'}}>
                     {invitation.guestName}
-                  </p>
-                  <p className="text-sm font-wedding-body" style={{color: '#381516'}}>
-                    di Tempat
                   </p>
                 </div>
               )}

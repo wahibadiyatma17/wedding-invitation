@@ -57,36 +57,35 @@ export function HeroSection() {
       </div>
 
       <div className="relative z-10 px-4 py-5 lg:px-6 lg:py-8 max-w-full">
-        {/* Main Couple Introduction */}
-        <div className={`mb-8 text-center transform transition-all duration-1000 delay-200 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
-          <div className="mb-5">
-            <div className="w-8 h-0.5 mx-auto mb-3 bg-linear-to-r from-transparent via-[#7F5F45] to-transparent"></div>
-            <p className="text-xs font-wedding-body tracking-[0.2em] uppercase mb-2" style={{color: '#381516'}}>
-              The Wedding of
+
+        {/* Formal Invitation Text */}
+        <div className="mb-8 animate-fadeInUp text-center" style={{animationDelay: '0.2s'}}>
+          
+          {/* Islamic Greeting */}
+          <div className="mb-4">
+            <p className="text-base lg:text-lg font-wedding-script italic font-medium leading-relaxed" style={{color: '#7F5F45'}}>
+              Bismillahirrahmanirrahim
             </p>
-            <div className="w-8 h-0.5 mx-auto bg-linear-to-r from-transparent via-[#7F5F45] to-transparent"></div>
+            <p className="text-sm lg:text-base font-wedding-body font-medium leading-relaxed" style={{color: '#7F5F45'}}>
+              Assalamu'alaikum Warahmatullahi Wabarakatuh
+            </p>
           </div>
           
-          <h1 className="text-2xl lg:text-4xl font-wedding-elegant mb-3 leading-tight" style={{color: '#311212'}}>
-            <span className={`block mb-1 transform transition-all duration-700 delay-300 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>{couple.bride.name}</span>
-            <span className={`text-lg lg:text-2xl font-wedding-script block mb-1 transform transition-all duration-700 delay-400 ${isVisible ? 'scale-100 opacity-100' : 'scale-110 opacity-0'}`} style={{color: '#7F5F45'}}>&</span>
-            <span className={`block transform transition-all duration-700 delay-500 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>{couple.groom.name}</span>
-          </h1>
+          {/* Main Invitation Text */}
+          <div className="px-2">
+            <p className="text-sm lg:text-base font-wedding-body leading-loose" style={{color: '#311212'}}>
+              Dengan memohon rahmat dan ridho Allah SWT, kami
+              bermaksud mengundang Bapak/Ibu/Saudara/i untuk
+              menghadiri acara pernikahan kami:
+            </p>
+          </div>
           
-          <div className={`transform transition-all duration-700 delay-600 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
-            <div className="inline-flex items-center space-x-2 bg-white/70 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg">
-              <div className="w-2 h-2 bg-linear-to-r from-[#C6B283] to-[#D6CB94] rounded-full"></div>
-              <p className="text-sm lg:text-base font-wedding-body" style={{color: '#381516'}}>
-                {displayDate.toLocaleDateString('id-ID', {
-                  weekday: 'long',
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric'
-                })}
-              </p>
-              <div className="w-2 h-2 bg-linear-to-r from-[#C6B283] to-[#D6CB94] rounded-full"></div>
+          {/* Bottom decorative element */}
+             <div className="flex items-center justify-center mt-6">
+              <div className="w-12 h-0.5 bg-linear-to-r from-transparent to-[#C6B283]"></div>
+              <div className="mx-3 w-1.5 h-1.5 rounded-full" style={{background: '#D6CB94'}}></div>
+              <div className="w-12 h-0.5 bg-linear-to-l from-transparent to-[#C6B283]"></div>
             </div>
-          </div>
         </div>
 
         {/* Couple Photos - Optimized for 450px */}
@@ -148,7 +147,7 @@ export function HeroSection() {
           <div className="mb-6 animate-fadeInUp" style={{animationDelay: '0.6s'}}>
             <div className="bg-white/60 backdrop-blur-sm rounded-lg p-4 border" style={{borderColor: 'rgba(191, 171, 151, 0.5)'}}>
               <p className="font-wedding-script text-sm lg:text-base leading-relaxed italic text-center" style={{color: '#7F5F45'}}>
-                &ldquo;{couple.spiritualQuote}&rdquo; (Q.S. Ar-Ruum : 21)
+                &ldquo;{couple.spiritualQuote}&rdquo; <br/>(Q.S. Ar-Ruum : 21)
               </p>
             </div>
           </div>

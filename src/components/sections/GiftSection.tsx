@@ -28,37 +28,46 @@ export function GiftSection() {
     }
   };
 
-  const getBankLogo = (bankName: string) => {
+  const getBankInfo = (bankName: string) => {
     if (bankName.toLowerCase().includes('bri')) {
-      return (
-        <div className="w-16 h-10 relative">
-          <Image
-            src="https://upload.wikimedia.org/wikipedia/commons/2/2e/BRI_2020.svg"
-            alt="BRI Logo"
-            fill
-            className="object-contain"
-          />
-        </div>
-      );
+      return {
+        logo: (
+          <div className="w-12 h-8 relative">
+            <Image
+              src="https://upload.wikimedia.org/wikipedia/commons/2/2e/BRI_2020.svg"
+              alt="BRI Logo"
+              fill
+              className="object-contain"
+            />
+          </div>
+        ),
+        displayName: 'Bank BRI'
+      };
     }
     if (bankName.toLowerCase().includes('bca')) {
-      return (
-        <div className="w-16 h-10 relative">
-          <Image
-            src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Bank_Central_Asia.svg"
-            alt="BCA Logo"
-            fill
-            className="object-contain"
-          />
-        </div>
-      );
+      return {
+        logo: (
+          <div className="w-12 h-8 relative">
+            <Image
+              src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Bank_Central_Asia.svg"
+              alt="BCA Logo"
+              fill
+              className="object-contain"
+            />
+          </div>
+        ),
+        displayName: 'Bank BCA'
+      };
     }
     // Default placeholder for other banks
-    return (
-      <div className="w-12 h-8 rounded flex items-center justify-center" style={{backgroundColor: '#F3E2D7'}}>
-        <div className="w-6 h-4 rounded-sm" style={{backgroundColor: '#C6B283'}}></div>
-      </div>
-    );
+    return {
+      logo: (
+        <div className="w-10 h-6 rounded flex items-center justify-center" style={{backgroundColor: '#F3E2D7'}}>
+          <div className="w-5 h-3 rounded-sm" style={{backgroundColor: '#C6B283'}}></div>
+        </div>
+      ),
+      displayName: bankName
+    };
   };
 
   return (
@@ -92,47 +101,91 @@ export function GiftSection() {
             </div>
           )}
           
-          <div className="space-y-6">
-            {gifts.bankAccounts.map((account, index) => (
-              <div key={index} className="border rounded-lg p-4 bg-white/80 backdrop-blur-sm" style={{borderColor: '#BFAB97'}}>
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-lg font-semibold font-wedding-elegant" style={{color: '#311212'}}>
-                    {account.bank}
-                  </h3>
-                  {getBankLogo(account.bank)}
-                </div>
-                
-                <div className="space-y-2 mb-4">
-                  <div className="flex justify-between items-center">
-                    <span className="font-wedding-body text-sm" style={{color: '#7F5F45'}}>Nomor Rekening:</span>
-                    <span className="font-mono font-semibold text-sm" style={{color: '#311212'}}>
-                      {account.accountNumber}
-                    </span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="font-wedding-body text-sm" style={{color: '#7F5F45'}}>Atas Nama:</span>
-                    <span className="font-semibold text-sm" style={{color: '#311212'}}>
-                      {account.accountName}
-                    </span>
-                  </div>
-                </div>
-                
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => copyToClipboard(account.accountNumber)}
-                  className="w-full transition-all duration-300" style={{borderColor: '#BFAB97', color: '#7F5F45'}} onMouseEnter={(e) => {e.currentTarget.style.backgroundColor = '#F3E2D7'; e.currentTarget.style.borderColor = '#C6B283'}} onMouseLeave={(e) => {e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.borderColor = '#BFAB97'}}
+          <div className="grid gap-6 md:grid-cols-2">
+            {gifts.bankAccounts.map((account, index) => {
+              const bankInfo = getBankInfo(account.bank);
+              return (
+                <div 
+                  key={index} 
+                  className="group relative overflow-hidden rounded-2xl p-6 transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                  style={{
+                    background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(243, 226, 215, 0.9) 100%)',
+                    border: '1px solid rgba(191, 171, 151, 0.3)',
+                    boxShadow: '0 8px 32px rgba(49, 18, 18, 0.1)'
+                  }}
                 >
-                  Salin Nomor Rekening
-                </Button>
-              </div>
-            ))}
-          </div>
-          
-          <div className="mt-6 p-4 backdrop-blur-sm rounded-lg border" style={{backgroundColor: 'rgba(243, 226, 215, 0.7)', borderColor: '#BFAB97'}}>
-            <p className="text-sm font-wedding-body" style={{color: '#381516'}}>
-              Terima kasih atas kebaikan dan perhatian Anda
-            </p>
+                  {/* Card Background Pattern */}
+                  <div 
+                    className="absolute inset-0 opacity-5"
+                    style={{
+                      backgroundImage: 'radial-gradient(circle at 20% 50%, #C6B283 1px, transparent 1px), radial-gradient(circle at 80% 50%, #C6B283 1px, transparent 1px)',
+                      backgroundSize: '30px 30px'
+                    }}
+                  />
+                  
+                  {/* Top Section - Bank Logo */}
+                  <div className="flex justify-between items-start mb-6">
+                    <div className="flex items-center">
+                      {bankInfo.logo}
+                    </div>
+                    <div className="w-8 h-8 rounded-full" style={{background: 'linear-gradient(45deg, #F3E2D7, #C6B283)'}}></div>
+                  </div>
+                  
+                  {/* Account Number */}
+                  <div className="mb-4">
+                    <div 
+                      className="font-mono font-bold text-xl md:text-2xl tracking-widest"
+                      style={{color: '#311212'}}
+                    >
+                      {account.accountNumber.replace(/(\d{4})/g, '$1 ').trim()}
+                    </div>
+                  </div>
+                  
+                  {/* Bottom Section */}
+                  <div className="flex justify-between items-end">
+                    <div>
+                      <div className="font-semibold text-lg" style={{color: '#311212'}}>
+                        {account.accountName}
+                      </div>
+                    </div>
+                    
+                    {/* Copy Button */}
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => copyToClipboard(account.accountNumber)}
+                      className="relative overflow-hidden px-3 py-2 transition-all duration-300 border-0"
+                      style={{
+                        background: 'linear-gradient(135deg, rgba(243, 226, 215, 0.8), rgba(198, 178, 131, 0.6))',
+                        color: '#7F5F45'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'translateY(-2px)';
+                        e.currentTarget.style.boxShadow = '0 4px 12px rgba(127, 95, 69, 0.3)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.boxShadow = 'none';
+                      }}
+                    >
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                      </svg>
+                    </Button>
+                  </div>
+                  
+                  {/* Card Shine Effect */}
+                  <div 
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                    style={{
+                      background: 'linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.2) 50%, transparent 70%)',
+                      transform: 'translateX(-100%)',
+                      animation: 'shimmer 2s infinite'
+                    }}
+                  />
+                </div>
+              );
+            })}
           </div>
         </Card>
       </div>

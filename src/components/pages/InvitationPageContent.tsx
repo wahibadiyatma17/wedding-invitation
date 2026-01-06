@@ -8,11 +8,13 @@ import Image from 'next/image';
 
 import { OpeningSection } from '@/components/sections/OpeningSection';
 import { HeroSection } from '@/components/sections/HeroSection';
+import { CoupleIntroSection } from '@/components/sections/CoupleIntroSection';
 import { EventSection } from '@/components/sections/EventSection';
 import { EventMapSection } from '@/components/sections/EventMapSection';
 import { GallerySection } from '@/components/sections/GallerySection';
 import { GiftSection } from '@/components/sections/GiftSection';
 import { GuestbookSection } from '@/components/sections/GuestbookSection';
+import { ClosingSection } from '@/components/sections/ClosingSection';
 
 import { MusicControl } from '@/components/ui/MusicControl';
 import { Modal } from '@/components/ui/Modal';
@@ -112,9 +114,15 @@ export function InvitationPageContent({ eventFilter }: InvitationPageContentProp
           className="w-full lg:w-[450px] lg:ml-auto lg:fixed lg:right-0 lg:top-0 lg:h-screen lg:overflow-y-auto"
           style={{ background: 'linear-gradient(135deg, #FDF1E9 0%, #F3E2D7 50%, #BFAB97 100%)' }}
         >
-          <ScrollReveal direction="fade" threshold={0.1}>
+          <ScrollReveal direction="up" delay={50} threshold={0.1}>
+            <CoupleIntroSection />
+          </ScrollReveal>
+
+          <ScrollReveal direction="fade" threshold={0.15}>
             <HeroSection />
           </ScrollReveal>
+
+        
 
           <ScrollReveal direction="up" delay={100} threshold={0.15}>
             <EventSection />
@@ -133,6 +141,10 @@ export function InvitationPageContent({ eventFilter }: InvitationPageContentProp
           </ScrollReveal>
 
           <GuestbookSection />
+
+          <ScrollReveal direction="up" delay={250} threshold={0.15}>
+            <ClosingSection />
+          </ScrollReveal>
         </div>
       </div>
 

@@ -235,7 +235,7 @@ export function GallerySection() {
   return (
     <ScrollReveal direction="fade" duration={800}>
       <section 
-        className="relative h-screen w-full bg-black overflow-hidden cursor-none"
+        className="relative h-screen w-full bg-[#311212] overflow-hidden cursor-none"
         onMouseMove={handleMouseMove}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
@@ -244,11 +244,11 @@ export function GallerySection() {
         {/* Section Header */}
         <animated.div 
           style={controlsAnimation}
-          className="absolute top-0 left-0 right-0 z-30 p-6 bg-gradient-to-b from-black/60 to-transparent"
+          className="absolute top-8 left-0 right-0 z-30 p-6 bg-linear-to-b from-[#311212]/60 to-transparent"
         >
           <div className="text-center">
             <h2 className="text-2xl md:text-4xl font-wedding-elegant text-white mb-2">
-              Galeri Pre-Wedding
+              Capture Moment
             </h2>
           </div>
         </animated.div>
@@ -260,19 +260,19 @@ export function GallerySection() {
               style={style}
               className="absolute inset-0"
             >
-              <div className="relative h-full w-full">
+              <div className="relative h-full w-full bg-[#311212]">
                 <Image
                   src={galleryImages[item]}
                   alt={`Wedding photo ${item + 1}`}
                   fill
-                  className="object-cover"
+                  className="object-contain"
                   priority={item === currentSlide}
                   onLoad={handleImageLoad}
                   sizes="100vw"
                 />
                 
                 {/* Image Overlay Gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#311212]/20 via-transparent to-[#311212]/10 pointer-events-none" />
                 
                 {/* Caption Overlay */}
                 <animated.div 
@@ -372,18 +372,6 @@ export function GallerySection() {
             </div>
           </div>
         )}
-
-        {/* Keyboard Instructions (shown briefly on load) */}
-        <animated.div 
-          style={{
-            ...controlsAnimation,
-            opacity: controlsAnimation.opacity.to(o => o * 0.8)
-          }}
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 text-center text-white/60 pointer-events-none"
-        >
-          <p className="text-sm mb-2">Navigate with ← → keys or swipe</p>
-          <p className="text-xs">Press P to pause/play • Space for next</p>
-        </animated.div>
       </section>
     </ScrollReveal>
   );
