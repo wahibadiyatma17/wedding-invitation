@@ -55,7 +55,7 @@ export function ClosingSection() {
                 }}
               >
                 <Image
-                  src="/images/closing-2.jpeg"
+                  src="/images/closing-4.jpeg"
                   alt={`${couple.bride.name} & ${couple.groom.name}`}
                   fill
                   className="object-cover"
