@@ -107,7 +107,7 @@ export function GiftSection() {
               return (
                 <div 
                   key={index} 
-                  className="group relative overflow-hidden rounded-2xl p-6 transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                  className="group relative overflow-hidden rounded-2xl p-4 transition-all duration-300 hover:scale-105 hover:shadow-xl"
                   style={{
                     background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(243, 226, 215, 0.9) 100%)',
                     border: '1px solid rgba(191, 171, 151, 0.3)',
@@ -134,7 +134,7 @@ export function GiftSection() {
                   {/* Account Number */}
                   <div className="mb-4">
                     <div 
-                      className="font-mono font-bold text-xl md:text-2xl tracking-widest"
+                      className="font-mono font-bold text-base md:text-lg tracking-widest"
                       style={{color: '#311212'}}
                     >
                       {account.accountNumber.replace(/(\d{4})/g, '$1 ').trim()}
@@ -144,7 +144,7 @@ export function GiftSection() {
                   {/* Bottom Section */}
                   <div className="flex justify-between items-end">
                     <div>
-                      <div className="font-semibold text-lg" style={{color: '#311212'}}>
+                      <div className="font-semibold text-base" style={{color: '#311212'}}>
                         {account.accountName}
                       </div>
                     </div>
