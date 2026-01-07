@@ -55,14 +55,14 @@ export function ClosingSection() {
                 }}
               >
                 <Image
-                  src="/images/pre-wedding-images/37.jpg"
+                  src="/images/closing-2.jpeg"
                   alt={`${couple.bride.name} & ${couple.groom.name}`}
                   fill
                   className="object-cover"
                   priority
                 />
                 {/* Soft overlay for elegance */}
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/5"></div>
+                <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-black/5"></div>
               </div>
             </div>
             
@@ -89,7 +89,7 @@ export function ClosingSection() {
             
             {/* Decorative Divider */}
             <div className="flex justify-center">
-              <div className="w-16 h-0.5 bg-gradient-to-r from-transparent via-wedding-gold to-transparent" style={{background: 'linear-gradient(to right, transparent, #C6B283, transparent)'}}></div>
+              <div className="w-16 h-0.5 bg-linear-to-r from-transparent via-wedding-gold to-transparent" style={{background: 'linear-gradient(to right, transparent, #C6B283, transparent)'}}></div>
             </div>
             
             <p 
