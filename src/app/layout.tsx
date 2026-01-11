@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { headers } from 'next/headers';
 import "./globals.css";
 
 const geistSans = Geist({
@@ -12,67 +13,75 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "Undangan Pernikahan Aji & Ery - 24 Januari 2026",
-  description: "Akhmad Lutfiyan Aji & Khofifah Ery Nur Aeini mengundang Anda dalam momen sakral pernikahan kami. Mohon doa restu untuk hari bahagia kami pada 24 Januari 2026 di Ganeca Convention Hall, Purworejo.",
-  keywords: ["undangan pernikahan", "wedding invitation", "Aji & Ery", "pernikahan", "wedding", "Purworejo", "24 Januari 2026", "Akhmad Lutfiyan Aji", "Khofifah Ery Nur Aeini"],
-  authors: [{ name: "Aji & Ery" }],
-  creator: "Aji & Ery",
-  publisher: "Aji & Ery",
-  category: "wedding",
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
-  alternates: {
-    canonical: '/',
-  },
-  openGraph: {
-    title: "Undangan Pernikahan Aji & Ery - 24 Januari 2026",
-    description: "Akhmad Lutfiyan Aji & Khofifah Ery Nur Aeini mengundang Anda dalam momen sakral pernikahan kami. Mohon doa restu untuk hari bahagia kami pada 24 Januari 2026.",
-    url: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
-    siteName: "Undangan Pernikahan Aji & Ery",
-    images: [
-      {
-        url: "/images/aji-ery-social.png",
-        width: 1200,
-        height: 630,
-        alt: "Aji & Ery Pre-Wedding Photo - Wedding Invitation 24 Januari 2026",
-      },
-    ],
-    locale: "id_ID",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Undangan Pernikahan Aji & Ery - 24 Januari 2026",
-    description: "Akhmad Lutfiyan Aji & Khofifah Ery Nur Aeini mengundang Anda dalam momen sakral pernikahan kami. Mohon doa restu untuk hari bahagia kami.",
-    images: ["/images/aji-ery-social.png"],
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
+export async function generateMetadata(): Promise<Metadata> {
+  const headersList = await headers();
+  const pathname = headersList.get('x-pathname') || '';
+  
+  const isAkadNikah = pathname.includes('/akad_nikah');
+  const date = isAkadNikah ? '19 Januari 2026' : '24 Januari 2026';
+  
+  return {
+    title: `Undangan Pernikahan Aji & Ery - ${date}`,
+    description: `Akhmad Lutfiyan Aji & Khofifah Ery Nur Aeini mengundang Anda dalam momen sakral pernikahan kami. Mohon doa restu untuk hari bahagia kami pada ${date} di Ganeca Convention Hall, Purworejo.`,
+    keywords: ["undangan pernikahan", "wedding invitation", "Aji & Ery", "pernikahan", "wedding", "Purworejo", date, "Akhmad Lutfiyan Aji", "Khofifah Ery Nur Aeini"],
+    authors: [{ name: "Aji & Ery" }],
+    creator: "Aji & Ery",
+    publisher: "Aji & Ery",
+    category: "wedding",
+    formatDetection: {
+      email: false,
+      address: false,
+      telephone: false,
+    },
+    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
+    alternates: {
+      canonical: '/',
+    },
+    openGraph: {
+      title: `Undangan Pernikahan Aji & Ery - ${date}`,
+      description: `Akhmad Lutfiyan Aji & Khofifah Ery Nur Aeini mengundang Anda dalam momen sakral pernikahan kami. Mohon doa restu untuk hari bahagia kami pada ${date}.`,
+      url: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
+      siteName: "Undangan Pernikahan Aji & Ery",
+      images: [
+        {
+          url: "/images/aji-ery-social.png",
+          width: 1200,
+          height: 630,
+          alt: `Aji & Ery Pre-Wedding Photo - Wedding Invitation ${date}`,
+        },
+      ],
+      locale: "id_ID",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Undangan Pernikahan Aji & Ery - ${date}`,
+      description: "Akhmad Lutfiyan Aji & Khofifah Ery Nur Aeini mengundang Anda dalam momen sakral pernikahan kami. Mohon doa restu untuk hari bahagia kami.",
+      images: ["/images/aji-ery-social.png"],
+    },
+    robots: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
     },
-  },
-  icons: {
-    icon: [
-      { url: "/favicon.ico" },
-      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
-      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
-    ],
-    apple: [
-      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
-    ],
-  },
-};
+    icons: {
+      icon: [
+        { url: "/favicon.ico" },
+        { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+        { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      ],
+      apple: [
+        { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+      ],
+    },
+  };
+}
 
 export default function RootLayout({
   children,
