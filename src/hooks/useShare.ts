@@ -1,9 +1,8 @@
 'use client';
 
-import { useUIStore } from '@/stores/uiStore';
+import toast from 'react-hot-toast';
 
 export function useShare() {
-  const addToast = useUIStore((state) => state.addToast);
 
   const getShareData = () => ({
     title: 'Undangan Pernikahan Aji & Ery',
@@ -37,11 +36,7 @@ export function useShare() {
     try {
       if (navigator.clipboard && window.isSecureContext) {
         await navigator.clipboard.writeText(shareData.url);
-        addToast({
-          type: 'success',
-          message: 'Link berhasil disalin!',
-          duration: 2000
-        });
+        toast.success('Link berhasil disalin!');
       } else {
         // Fallback for non-secure contexts or older browsers
         const textArea = document.createElement('textarea');
@@ -55,27 +50,15 @@ export function useShare() {
 
         try {
           document.execCommand('copy');
-          addToast({
-            type: 'success',
-            message: 'Link berhasil disalin!',
-            duration: 2000
-          });
+          toast.success('Link berhasil disalin!');
         } catch {
-          addToast({
-            type: 'error',
-            message: 'Gagal menyalin link',
-            duration: 2000
-          });
+          toast.error('Gagal menyalin link');
         }
 
         textArea.remove();
       }
     } catch {
-      addToast({
-        type: 'error',
-        message: 'Gagal menyalin link',
-        duration: 2000
-      });
+      toast.error('Gagal menyalin link');
     }
   };
 

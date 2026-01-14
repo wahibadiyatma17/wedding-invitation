@@ -20,13 +20,6 @@ export interface AudioPlayerState {
   autoplayBlocked: boolean;
 }
 
-export interface ToastMessage {
-  id: string;
-  type: 'success' | 'error' | 'info';
-  message: string;
-  duration?: number;
-}
-
 export interface ModalState {
   isOpen: boolean;
   content?: React.ReactNode;

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { headers } from 'next/headers';
+import { Toaster } from 'react-hot-toast';
 import "./globals.css";
 
 const geistSans = Geist({
@@ -83,6 +84,12 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -136,6 +143,44 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
+        <Toaster
+          position="top-right"
+          containerStyle={{
+            top: 20,
+            right: 20,
+            zIndex: 10000,
+          }}
+          toastOptions={{
+            duration: 3000,
+            style: {
+              background: '#FDF1E9',
+              color: '#311212',
+              borderRadius: '0.5rem',
+              boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
+              padding: '1rem',
+              fontFamily: 'Crimson Text, serif',
+              maxWidth: '90vw',
+            },
+            success: {
+              iconTheme: {
+                primary: '#87A96B',
+                secondary: '#FDF1E9',
+              },
+              style: {
+                border: '2px solid #87A96B',
+              },
+            },
+            error: {
+              iconTheme: {
+                primary: '#A0522D',
+                secondary: '#FDF1E9',
+              },
+              style: {
+                border: '2px solid #A0522D',
+              },
+            },
+          }}
+        />
       </body>
     </html>
   );

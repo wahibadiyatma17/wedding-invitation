@@ -83,13 +83,6 @@ html {
   perspective: 1000px;
 }
 
-/* Smooth scrolling for mobile */
-@media (max-width: 768px) {
-  * {
-    transform: translateZ(0);
-  }
-}
-
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;

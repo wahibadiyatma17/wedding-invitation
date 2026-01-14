@@ -1,13 +1,12 @@
 import { useWeddingStore } from '@/stores/weddingStore';
-import { useUIStore } from '@/stores/uiStore';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { ParallaxWrapper } from '@/components/animations/ParallaxWrapper';
 import Image from 'next/image';
+import toast from 'react-hot-toast';
 
 export function GiftSection() {
   const { invitation } = useWeddingStore();
-  const { addToast } = useUIStore();
 
   if (!invitation) return null;
 
@@ -16,15 +15,9 @@ export function GiftSection() {
   const copyToClipboard = async (text: string) => {
     try {
       await navigator.clipboard.writeText(text);
-      addToast({
-        type: 'success',
-        message: 'Nomor rekening berhasil disalin!'
-      });
+      toast.success('Nomor rekening berhasil disalin!');
     } catch {
-      addToast({
-        type: 'error',
-        message: 'Gagal menyalin nomor rekening'
-      });
+      toast.error('Gagal menyalin nomor rekening');
     }
   };
 

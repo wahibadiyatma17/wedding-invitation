@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/Button';
 import { ScrollReveal } from '@/components/animations/ScrollReveal';
 import { ParallaxWrapper } from '@/components/animations/ParallaxWrapper';
 import { MessageCircle, Clock } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 export function GuestbookSection() {
   const invitation = useWeddingStore((state) => state.invitation);
@@ -17,7 +18,6 @@ export function GuestbookSection() {
   const guestbookError = useWeddingStore((state) => state.guestbookError);
   const addGuestbookEntry = useWeddingStore((state) => state.addGuestbookEntry);
   const subscribeToGuestbookUpdates = useWeddingStore((state) => state.subscribeToGuestbookUpdates);
-  const addToast = useUIStore((state) => state.addToast);
 
   const [formData, setFormData] = useState({
     guestName: '',
@@ -59,17 +59,17 @@ export function GuestbookSection() {
     e.preventDefault();
 
     if (!formData.guestName.trim()) {
-      addToast({ type: 'error', message: 'Mohon isi nama Anda' });
+      toast.error('Mohon isi nama Anda');
       return;
     }
 
     if (!formData.message.trim()) {
-      addToast({ type: 'error', message: 'Mohon isi pesan Anda' });
+      toast.error('Mohon isi pesan Anda');
       return;
     }
 
     if (formData.message.length > 500) {
-      addToast({ type: 'error', message: 'Pesan maksimal 500 karakter' });
+      toast.error('Pesan maksimal 500 karakter');
       return;
     }
 
@@ -89,10 +89,7 @@ export function GuestbookSection() {
         attendanceStatus: formData.attendanceStatus,
       });
 
-      addToast({
-        type: 'success',
-        message: 'Terima kasih atas ucapan dan doa Anda!'
-      });
+      toast.success('Terima kasih atas ucapan dan doa Anda!');
 
       // Reset form but keep guest name from URL if it exists
       setFormData({
@@ -117,21 +114,12 @@ export function GuestbookSection() {
 
         // Show specific error messages
         if (firebaseError.code === 'permission-denied') {
-          addToast({
-            type: 'error',
-            message: 'Akses ditolak. Silakan hubungi administrator.'
-          });
+          toast.error('Akses ditolak. Silakan hubungi administrator.');
         } else {
-          addToast({
-            type: 'error',
-            message: 'Gagal mengirim pesan. Silakan coba lagi.'
-          });
+          toast.error('Gagal mengirim pesan. Silakan coba lagi.');
         }
       } else {
-        addToast({
-          type: 'error',
-          message: 'Gagal mengirim pesan. Silakan coba lagi.'
-        });
+        toast.error('Gagal mengirim pesan. Silakan coba lagi.');
       }
     } finally {
       setIsSubmitting(false);

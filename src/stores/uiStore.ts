@@ -1,10 +1,10 @@
 import { create } from 'zustand';
-import { AudioPlayerState, ToastMessage, ModalState } from '@/types/ui';
+import toast from 'react-hot-toast';
+import { AudioPlayerState, ModalState } from '@/types/ui';
 import { generateId } from '@/utils/client-safe';
 
 interface UIStore {
   audioPlayer: AudioPlayerState;
-  toasts: ToastMessage[];
   modal: ModalState;
 
   setAudioPlaying: (isPlaying: boolean) => void;
@@ -15,10 +15,6 @@ interface UIStore {
   setFading: (isFading: boolean) => void;
   setAutoplayAttempted: (attempted: boolean) => void;
   setAutoplayBlocked: (blocked: boolean) => void;
-
-  addToast: (toast: Omit<ToastMessage, 'id'>) => void;
-  removeToast: (id: string) => void;
-
   openModal: (content: React.ReactNode, title?: string) => void;
   closeModal: () => void;
 }
@@ -44,7 +40,6 @@ export const useUIStore = create<UIStore>((set, get) => ({
     autoplayAttempted: false,
     autoplayBlocked: false
   },
-  toasts: [],
   modal: {
     isOpen: false
   },
@@ -101,26 +96,6 @@ export const useUIStore = create<UIStore>((set, get) => ({
   setAutoplayBlocked: (autoplayBlocked) => {
     set((state) => ({
       audioPlayer: { ...state.audioPlayer, autoplayBlocked }
-    }));
-  },
-
-  addToast: (toast) => {
-    const id = generateId('toast');
-    const newToast: ToastMessage = { ...toast, id };
-    
-    set((state) => ({
-      toasts: [...state.toasts, newToast]
-    }));
-
-    // Auto remove toast after duration
-    setTimeout(() => {
-      get().removeToast(id);
-    }, toast.duration || 3000);
-  },
-
-  removeToast: (id) => {
-    set((state) => ({
-      toasts: state.toasts.filter((toast) => toast.id !== id)
     }));
   },
 

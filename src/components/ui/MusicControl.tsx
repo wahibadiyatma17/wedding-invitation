@@ -5,6 +5,7 @@ import { createPortal } from 'react-dom';
 import { Music } from 'lucide-react';
 import { useUIStore } from '@/stores/uiStore';
 import { useAudioFade } from '@/hooks/useAudioFade';
+import toast from 'react-hot-toast';
 
 interface MusicControlProps {
   src: string;
@@ -21,7 +22,6 @@ export function MusicControl({ src }: MusicControlProps) {
     setFading,
     setAutoplayAttempted,
     setAutoplayBlocked,
-    addToast
   } = useUIStore();
 
   // Auto-play on opening animation complete
@@ -39,17 +39,17 @@ export function MusicControl({ src }: MusicControlProps) {
       } catch (error) {
         console.warn('Auto-play blocked:', error);
         setAutoplayBlocked(true);
-        addToast({
-          type: 'info',
-          message: 'Tap the music icon to enable sound',
-          duration: 4000
-        });
+        toast.custom((t) => (
+          <div className="bg-wedding-primary text-wedding-cream p-4 rounded-lg shadow-lg">
+            Tap the music icon to enable sound
+          </div>
+        ));
       }
     };
 
     window.addEventListener('openingAnimationComplete', handleOpeningComplete);
     return () => window.removeEventListener('openingAnimationComplete', handleOpeningComplete);
-  }, [audioPlayer.autoplayAttempted, audioPlayer.volume, fadeIn, setAudioPlaying, setAutoplayAttempted, setAutoplayBlocked, addToast]);
+  }, [audioPlayer.autoplayAttempted, audioPlayer.volume, fadeIn, setAudioPlaying, setAutoplayAttempted, setAutoplayBlocked]);
 
   // Page Visibility API - pause when tab is hidden
   useEffect(() => {
@@ -133,11 +133,7 @@ export function MusicControl({ src }: MusicControlProps) {
       } catch (error) {
         console.error('Failed to play audio:', error);
         setAudioPlaying(false);
-        addToast({
-          type: 'error',
-          message: 'Could not play music',
-          duration: 3000
-        });
+        toast.error('Could not play music');
       }
     }
   };

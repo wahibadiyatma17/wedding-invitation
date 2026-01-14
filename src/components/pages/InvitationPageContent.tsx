@@ -18,7 +18,6 @@ import { ClosingSection } from '@/components/sections/ClosingSection';
 
 import { MusicControl } from '@/components/ui/MusicControl';
 import { Modal } from '@/components/ui/Modal';
-import { ToastContainer } from '@/components/ui/Toast';
 import { ScrollReveal } from '@/components/animations/ScrollReveal';
 import { FloatingElements } from '@/components/decorative/FloatingElements';
 
@@ -151,7 +150,6 @@ export function InvitationPageContent({ eventFilter }: InvitationPageContentProp
       {weddingData.musicUrl && <MusicControl src={weddingData.musicUrl} />}
 
       <Modal />
-      <ToastContainer />
       <FloatingElements />
     </main>
   );

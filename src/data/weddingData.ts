@@ -71,10 +71,10 @@ export const weddingData: WeddingInvitation = {
       venue: {
         name: 'Dsn. Silegi, Desa Tlogobulu, Kec. Kaligesing, Kab. Purworejo',
         address: 'Dsn. Silegi, Desa Tlogobulu, Kec. Kaligesing, Kab. Purworejo',
-        mapUrl: 'https://maps.google.com',
+        mapUrl: 'https://maps.app.goo.gl/m5p9xiz3jQRGswN18',
         coordinates: {
-          lat: -7.7000,
-          lng: 110.1100
+          lat: -7.699357,
+          lng: 110.121315
         }
       }
     },
